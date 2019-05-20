@@ -305,6 +305,9 @@ export default class Editor extends Component {
             // Enables rubberband (marquee) selection and a handler for basic keystrokes
             var rubberband = new mxRubberband(graph);
             var keyHandler = new mxKeyHandler(graph);
+
+
+
         }
 
     }
@@ -434,27 +437,30 @@ export default class Editor extends Component {
             var rubberband = new mxRubberband(this.state.graph_global);
             var keyHandler = new mxKeyHandler(this.state.graph_global);
 
-            console.log(keyHandler)
 
 
-            // keyboard delete hit
-            // keyHandler.bindKey(46, function(evt)
-            // {
-            //     console.log("Delete key pressed ...")
-            //     if (this.state.graph_global.isEnabled())
-            //     {
-            //         this.state.graph_global.removeCells();
-            //     }
-            // });
+
 
             // keyboard backspace hit
+            var graph = this.state.graph_global;
 
             keyHandler.bindKey(8, function()
             {
 
-                if (this.state.graph_global.isEnabled())
+                if (graph.isEnabled())
                 {
-                    this.state.graph_global.removeCells();
+                    console.log(graph.getSelectionCell())
+                    graph.removeCells();
+                }
+            });
+
+            // keyboard delete hit
+            keyHandler.bindKey(46, function(evt)
+            {
+                if (graph.isEnabled())
+                {
+                    console.log(graph.getSelectionCell())
+                    graph.removeCells();
                 }
             });
 
