@@ -6,7 +6,8 @@ import {
 import React from 'react'
 import {
     Home,
-    NotFound
+    NotFound,
+    Editor
 } from './LoadComponent'
 
 const PublicRoute = ({ component: Component, ...rest }) => {
@@ -33,6 +34,7 @@ class Routes extends React.Component {
                     <div>
                         <Switch>
                             <PublicRoute exact path="/" component={Home} />
+                            <PublicRoute exact path="/editor/:id" component={Editor} />
                             <Route component={NotFound} />
                         </Switch>
                     </div>

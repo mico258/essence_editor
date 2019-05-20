@@ -11,4 +11,11 @@ export const Home = Loadable({
 export const NotFound = Loadable({
     loader: () => import('./Page/notFound/NotFound'),
     loading: Loading,
+    timeout: 5000,
+});
+
+export const Editor = Loadable({
+    loader: () => import('./Page/editor/Editor'),
+    loading: Loading,
+    timeout: 5000,
 });
