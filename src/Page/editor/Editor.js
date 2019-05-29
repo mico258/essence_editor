@@ -5,6 +5,7 @@ import {
     mxGraph,
     mxRubberband,
     mxKeyHandler,
+    mxCell,
     mxClient,
     mxUtils,
     mxStylesheet,
@@ -444,6 +445,8 @@ export default class Editor extends Component {
             // keyboard backspace hit
             var graph = this.state.graph_global;
 
+
+
             keyHandler.bindKey(8, function()
             {
 
@@ -463,6 +466,112 @@ export default class Editor extends Component {
                     graph.removeCells();
                 }
             });
+
+            // keyboard Left Arrow hit
+            keyHandler.bindKey(37, function(evt)
+            {
+                if (graph.isEnabled())
+                {
+
+                    graph.getModel().beginUpdate();
+
+                    try {
+
+
+                        //let editedCell = new mxCell(null,geometry,graph.getSelectionCell().getStyle());
+                        graph.translateCell(graph.getSelectionCell(),-10,0)
+
+                    } catch (e) {
+
+                        console.log(e)
+
+                    } finally {
+                        // Updates the display
+                        graph.getModel().endUpdate();
+                    }
+
+                }
+            });
+
+            // keyboard Up Arrow hit
+            keyHandler.bindKey(38, function(evt)
+            {
+                if (graph.isEnabled())
+                {
+
+                    graph.getModel().beginUpdate();
+
+                    try {
+
+
+                        //let editedCell = new mxCell(null,geometry,graph.getSelectionCell().getStyle());
+                        graph.translateCell(graph.getSelectionCell(),0,-10)
+
+                    } catch (e) {
+
+                        console.log(e)
+
+                    } finally {
+                        // Updates the display
+                        graph.getModel().endUpdate();
+                    }
+
+                }
+            });
+
+            // keyboard Right Arrow hit
+            keyHandler.bindKey(39, function(evt)
+            {
+                if (graph.isEnabled())
+                {
+
+                    graph.getModel().beginUpdate();
+
+                    try {
+
+
+                        //let editedCell = new mxCell(null,geometry,graph.getSelectionCell().getStyle());
+                        graph.translateCell(graph.getSelectionCell(),10,0)
+
+                    } catch (e) {
+
+                        console.log(e)
+
+                    } finally {
+                        // Updates the display
+                        graph.getModel().endUpdate();
+                    }
+
+                }
+            });
+
+            // keyboard Down Arrow hit
+            keyHandler.bindKey(40, function(evt)
+            {
+                if (graph.isEnabled())
+                {
+
+                    graph.getModel().beginUpdate();
+
+                    try {
+
+
+                        //let editedCell = new mxCell(null,geometry,graph.getSelectionCell().getStyle());
+                        graph.translateCell(graph.getSelectionCell(),0,10)
+
+                    } catch (e) {
+
+                        console.log(e)
+
+                    } finally {
+                        // Updates the display
+                        graph.getModel().endUpdate();
+                    }
+
+                }
+            });
+
+
 
         }
     }
