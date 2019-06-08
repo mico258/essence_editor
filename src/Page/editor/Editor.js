@@ -22,14 +22,18 @@ import ActivityPng from "../../Assets/EssenceKernel/Activity.png";
 import ActivitySpacePng from "../../Assets/EssenceKernel/Activity_Space.png";
 import CompetencyPng from "../../Assets/EssenceKernel/Competency.png";
 import WorkProductPng from "../../Assets/EssenceKernel/Work_Product.png";
+import KernelDetail from "../../Component/kernelDetail/KernelDetail";
+import Modal from "@material-ui/core/Modal/Modal";
 
 
 export default class Editor extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            openForm : false,
             graph_global : null,
-            essence_componen :[],
+            essence_component :[],
+            detail_data : null,
             essence_kernel: [
                 {
                   id :1 ,
@@ -63,6 +67,7 @@ export default class Editor extends Component {
 
             ]
         };
+
         this.refreshGraph = this.refreshGraph.bind(this);
         this.LoadGraph = this.LoadGraph.bind(this);
         this.addAlpha = this.addAlpha.bind(this);
@@ -72,6 +77,18 @@ export default class Editor extends Component {
         this.addWorkProduct = this.addWorkProduct.bind(this);
     }
 
+    openModal() {
+        this.setState({
+            openForm: true
+        });
+    };
+
+    handleClose() {
+        this.setState({
+            openForm: false
+        })
+    };
+
     componentDidMount() {
         this.LoadGraph();
     }
@@ -79,7 +96,7 @@ export default class Editor extends Component {
     addAlpha() {
 
         let newAlpha = {
-            name: 'TESTTTTT',
+            name: 'New Alpha',
             type: 'Alpha',
             x: 500,
             y: 120,
@@ -116,7 +133,7 @@ export default class Editor extends Component {
     addActivity() {
 
         let newActivity = {
-            name: 'A1',
+            name: 'New Activity',
             type: 'Activity',
             x: 500,
             y: 160,
@@ -153,7 +170,7 @@ export default class Editor extends Component {
     addActivitySpace() {
 
         let newActivitySpace = {
-            name: 'AS1',
+            name: 'New Activity Space',
             type: 'ActivitySpace',
             x: 500,
             y: 200,
@@ -190,7 +207,7 @@ export default class Editor extends Component {
     addCompetency() {
 
         let newCompetency = {
-            name: 'C1',
+            name: 'New Competency',
             type: 'Competency',
             x: 500,
             y: 240,
@@ -227,7 +244,7 @@ export default class Editor extends Component {
     addWorkProduct() {
 
         let newWorkProduct = {
-            name: 'WP1',
+            name: 'New Work Product',
             type: 'WorkProduct',
             x: 500,
             y: 240,
@@ -286,18 +303,11 @@ export default class Editor extends Component {
 
             try {
 
-                // var e1 = graph.insertEdge(
-                //     parent,
-                //     null,
-                //     "",
-                //     v1,
-                //     v2,
-                //     "strokeWidth=2;endArrow=block;endSize=2;endFill=1;strokeColor=blue;rounded=1;"
-                // );
-                // var e2 = graph.insertEdge(parent, null, "Edge 2", v2, v3);
-                // var e3 = graph.insertEdge(parent, null, "Edge 3", v1, v3);
 
-                //data
+            }catch (e) {
+
+                console.log(e)
+
             } finally {
                 // Updates the display
                 graph.getModel().endUpdate();
@@ -444,9 +454,24 @@ export default class Editor extends Component {
 
             // keyboard backspace hit
             var graph = this.state.graph_global;
+            var detail = this;
 
 
+            // keyboard enter hit
+            keyHandler.bindKey(13, function()
+            {
+                if (graph.isEnabled())
+                {
+                    let kernel_data_detail = graph.getSelectionCell()
+                    detail.detail_data = kernel_data_detail
+                    detail.openModal();
+                }
 
+
+            });
+
+
+            // keyboard backspace hit
             keyHandler.bindKey(8, function()
             {
 
@@ -578,6 +603,11 @@ export default class Editor extends Component {
     render() {
         return (
             <div>
+                <div className="topnav">
+                    <a className="active" href="#home">Home</a>
+                    <a href="#news">News</a>
+
+                </div>
                 <div className="sidenav">
                     <button onClick={this.addAlpha}><img src={Alpha}/></button>
                     <button onClick={this.addActivity}><img src={ActivityPng}/></button>
@@ -589,6 +619,10 @@ export default class Editor extends Component {
 
                     <div className="graph-container" ref="divGraph" id="divGraph" />
                 </div>
+
+                <Modal open={this.state.openForm} onClose={this.handleClose.bind(this)} >
+                    <KernelDetail essence_kernel={this.detail_data}/>
+                </Modal>
             </div>
 
         )
