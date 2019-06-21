@@ -5,6 +5,9 @@ import {
     mxGraph,
     mxRubberband,
     mxKeyHandler,
+    mxEdgeHandler,
+    mxVertexHandler,
+    mxConnectionHandler,
     mxCell,
     mxClient,
     mxUtils,
@@ -17,6 +20,7 @@ import {
 import SideBar from './../../Component/sideBar/SideBar'
 import './Editor.css'
 import { black } from "ansi-colors";
+import Json from "../../Assets/Action/json_icon.png";
 import Alpha from "../../Assets/EssenceKernel/Alpha.png";
 import ActivityPng from "../../Assets/EssenceKernel/Activity.png";
 import ActivitySpacePng from "../../Assets/EssenceKernel/Activity_Space.png";
@@ -75,6 +79,7 @@ export default class Editor extends Component {
         this.addActivitySpace = this.addActivitySpace.bind(this);
         this.addCompetency = this.addCompetency.bind(this);
         this.addWorkProduct = this.addWorkProduct.bind(this);
+        this.toJSON = this.toJSON.bind(this);
     }
 
     openModal() {
@@ -91,6 +96,363 @@ export default class Editor extends Component {
 
     componentDidMount() {
         this.LoadGraph();
+    }
+
+    toJSON() {
+        const element = document.createElement("a");
+        const data_json = {
+            "name_id" : "ProductBacklogEssentials",
+            "name": "Product Backlog Essentials",
+            "description": "Capture what the users of a system want it to do as a priority-ranked list of independently buildable items",
+            "intention": ["Add work tracking necessities"],
+            "activitySpace" : [
+                {
+                    "name_id" : "UnderstandTheRequirements",
+                    "name": "Understand The Requirements",
+                    "description" : "Establish a shared understanding of what the system to be produced must do",
+                    "activity": [
+                        {
+                            "name_id" : "RefineProductBacklog",
+                            "name" : "Refine Product Backlog",
+                            "description" : "Get and keep the Product Backlog visible, up-to-date and in good working order, with high priority items well understood",
+                            "completionCriterion" :
+                                {
+                                    "alphas" : [
+                                        "Requirements.Coherent",
+                                        "ProductBacklogItem.Identified"
+                                    ],
+                                    "workProduct" : [
+                                        "ProductBacklog.ItemsPrioritized"
+                                    ]
+                                },
+                            "entryCriterion" :
+                                {
+                                    "alphas" : [],
+                                    "workProduct" : [
+                                        "ProductBacklog.Any"
+                                    ]
+                                },
+                            "competencies" : [
+                                "StakeholderRepresentation",
+                                "Development",
+                                "Analysis",
+                                "Testing"
+                            ]
+                        },
+                        {
+                            "name_id" : "AgreeDefinitionOfDone",
+                            "name" : "Agree Definition of Done",
+                            "description" : "Agree the quality criteria that will be used to determine whether any change to the product is fully and correctly implemented",
+                            "completionCriterion" :
+                                {
+                                    "alphas" : [
+                                        "Requirements.Coherent"
+                                    ],
+                                    "workProduct" : [
+                                        "DefinitionOfDone.CompletionConditionsListedOrBeyond"
+                                    ]
+                                },
+                            "entryCriterion" :
+                                {
+                                    "alphas" : [],
+                                    "workProduct" : []
+                                },
+                            "competencies" : [
+                                "StakeholderRepresentation",
+                                "Development",
+                                "Analysis",
+                                "Testing"
+                            ]
+                        },
+                        {
+                            "name_id" : "PrepareAProductBacklogItem",
+                            "name" : "Prepare a Product Backlog Item",
+                            "description" : "Ensure that the Product Backlog Item is ready for development and that it is clear how it will be tested",
+                            "completionCriterion" :
+                                {
+                                    "alphas" : [
+                                        "Requirements.Coherent",
+                                        "ProductBacklogItem.ReadyForDevelopment"
+                                    ],
+                                    "workProduct" : [
+                                        "TestCase.TestIdeasCapturedOrBeyond"
+                                    ]
+                                },
+                            "entryCriterion" :
+                                {
+                                    "alphas" : [
+                                        "ProductBacklogItem.Identified"
+                                    ],
+                                    "workProduct" : [
+                                        "ProductBacklog.ItemsPrioritized"
+                                    ]
+                                },
+                            "competencies" : [
+                                "StakeholderRepresentation",
+                                "Development",
+                                "Analysis",
+                                "Testing"
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "alpha" : [
+                {
+                    "name_id" : "Requirements",
+                    "name" : "Requirements",
+                    "description" : "What the software system must do to address the opportunity and satisfy the stakeholders",
+                    "workProduct" : [
+                        {
+                            "name_id" : "ProductBacklog",
+                            "name" : "Product Backlog",
+                            "description" : "Testing An ordered list of things to build into the product to enhance its value",
+                            "level_of_detail" : [
+                                "ItemsGathered",
+                                "ItemsPrioritized",
+                                "Cost-BenefitQuantified"
+                            ]
+                        },
+                        {
+                            "name_id" : "DefinitionOfDone",
+                            "name" : "Definition of Done",
+                            "description" : "The quality criteria that will be used to determine whether the product is of acceptable / releasable quality",
+                            "level_of_detail" : [
+                                "CompletionConditionsListed",
+                                "QualityCriteriaAndEvidenceDescribed"
+                            ]
+                        },
+                        {
+                            "name_id" : "TestCase",
+                            "name" : "Test Case",
+                            "description" : "Defines test inputs and expected results to help evaluate whether a specific aspect of the system works correctly",
+                            "level_of_detail" : [
+                                "TestIdeasCaptured",
+                                "Scripted",
+                                "Automated"
+                            ]
+                        }
+                    ],
+                    "state" : [
+                        {
+                            "name_id" : "Conceived",
+                            "name" : "Conceived",
+                            "description" : "The need for a new system has been agreed",
+                            "checklist" : [
+                                "Stakeholders agree system is to be produced",
+                                "Users identified",
+                                "Funding stakeholders identified",
+                                "Opportunity clear"
+                            ]
+                        },
+                        {
+                            "name_id" : "Bounded",
+                            "name" : "Bounded",
+                            "description" : "The purpose and theme of the new system are clear",
+                            "checklist" : [
+                                "Development stakeholders identified",
+                                "System purpose agreed",
+                                "System success clear",
+                                "Shared solution understanding exists",
+                                "Requirement's format agreed",
+                                "Requirements management in place",
+                                "Prioritization scheme clear",
+                                "Constraints identified & considered",
+                                "Assumptions clear"
+                            ]
+                        },
+                        {
+                            "name_id" : "Coherent",
+                            "name" : "Coherent",
+                            "description" : "The requirements provide a coherent description of the essential characteristics of the new system",
+                            "checklist" : [
+                                "Requirements shared",
+                                "Requirements' origin clear",
+                                "Rationale clear",
+                                "Conflicts addressed",
+                                "Essential characteristics clear",
+                                "Key usage scenarios explained",
+                                "Priorities clear",
+                                "Impact understood",
+                                "Team knows & agrees on what to deliver"
+                            ]
+                        },
+                        {
+                            "name_id" : "Acceptable",
+                            "name" : "Acceptable",
+                            "description" : "The requirements describe a system that is acceptable to the stakeholders",
+                            "checklist" : [
+                                "Acceptable solution described",
+                                "Change under control",
+                                "Value to be realized clear",
+                                "Clear how opportunity addressed",
+                                "Testable"
+                            ]
+                        },
+                        {
+                            "name_id" : "Addressed",
+                            "name" : "Addressed",
+                            "description" : "Enough of the requirements have been addressed to satisfy the need for a new system in a way that is acceptable to the stakeholders",
+                            "checklist" : [
+                                "Enough addressed to be acceptable",
+                                "Requirements and system match",
+                                "Value realized clear",
+                                "System worth making operational"
+                            ]
+                        },
+                        {
+                            "name_id" : "Fulfilled",
+                            "name" : "Fulfilled",
+                            "description" : "The requirements that have been addressed fully satisfy the need for a new system",
+                            "checklist" : [
+                                "Stakeholders accept requirements",
+                                "No hindering requirements",
+                                "Requirements fully satisfied"
+                            ]
+                        }
+                    ],
+                    "subAlpha" : [
+                        {
+                            "name_id" : "ProductBacklogItem",
+                            "name" : "Product Backlog Item",
+                            "parent_name_id" : "Requirements",
+                            "description" : "Something to build into the product to enhance its value",
+                            "workProduct" : [],
+                            "state" : [
+                                {
+                                    "name_id" : "Identified",
+                                    "name" : "Identified",
+                                    "description" : "A way to enhance the value of a product has been found",
+                                    "checklist" : [
+                                        "A way to enhance the value of a product has been found",
+                                        "The item has an agreed name that is unique and meaningful",
+                                        "There is a shared high-level understanding of what the item is and why it is needed"
+                                    ]
+                                },
+                                {
+                                    "name_id" : "ReadyForDevelopment",
+                                    "name" : "Ready for Development",
+                                    "description" : "The item is sufficiently well understood that the team responsible for adding it to the product can plan and start the work to get this done",
+                                    "checklist" : [
+                                        "The item is well-enough understood by the stakeholders and the team for it to be prioritized for development",
+                                        "The value is understood enough to proceed",
+                                        "The size of the item is understood enough to proceed",
+                                        "The relative priority of the item is agreed"
+                                    ]
+                                },
+                                {
+                                    "name_id" : "Done",
+                                    "name" : "Done",
+                                    "description" : "The item has been implemented in the product and has been demonstrated to be of adequate quality",
+                                    "checklist" : [
+                                        "The item has been included in the product",
+                                        "The stakeholders are happy that the value associated with the item has been realized",
+                                        "The item has been verified as meeting all relevant quality criteria",
+                                        "The item has been validated as being usable and fit-for-purpose"
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "competencies" : [
+                {
+                    "name_id" : "StakeholderRepresentation",
+                    "name" : "Stakeholder Representation",
+                    "description" : "The ability to gather, communicate and balance the needs of other stakeholders, and accurately represent their views",
+                    "level" : [
+                        "Assists", "Applies", "Masters", "Adapt", "Innovates"
+                    ]
+                },
+                {
+                    "name_id" : "Development",
+                    "name" : "Development",
+                    "description" : "The ability to design and program effective software systems following the standards and norms agreed by the team",
+                    "level" : [
+                        "Assists", "Applies", "Masters", "Adapt", "Innovates"
+                    ]
+                },
+                {
+                    "name_id" : "Testing",
+                    "name" : "Testing",
+                    "description" : "The ability to test a system, verifying that it is usable and that it meets the requirements",
+                    "level" : [
+                        "Assists", "Applies", "Masters", "Adapt", "Innovates"
+                    ]
+                },
+                {
+                    "name_id" : "Analysis",
+                    "name" : "Analysis",
+                    "description" : "The ability to understand opportunities and their related stakeholder needs, and transform them into an agreed and consistent set of requirements",
+                    "level" : [
+                        "Assists", "Applies", "Masters", "Adapt", "Innovates"
+                    ]
+                }
+            ],
+            "patterns" : [
+                {
+                    "name_id" : "Estimating",
+                    "name" : "Estimating",
+                    "description" : "Estimating patterns provide guidance on how to maintain work progress measures and forecasting capability",
+                    "pattern" : [
+                        {
+                            "name_id" : "RelativeEstimating",
+                            "name" : "Relative Estimating",
+                            "description" : "Effort to get Product Backlog Items done is estimated not in absolute units of time, but relative to each other. This allows progress to be predicted based on performance",
+                            "alpha" : [],
+                            "activity" : [],
+                            "competencies" : [],
+                        }
+                    ]
+                },
+                {
+                    "name_id" : "ProductValue",
+                    "name" : "Product Value",
+                    "description" : "Product Value patterns provide guidance on how to define and prioritize the value to build into the solution",
+                    "pattern" : [
+                        {
+                            "name_id" : "INVEST",
+                            "name" : "INVEST",
+                            "description" : "Independent, Negotiable, Valuable, Estimable, Small, Testable",
+                            "alpha" : [],
+                            "activity" : [],
+                            "competencies" : [],
+                        },
+                        {
+                            "name_id" : "SplittingProductBacklogItems",
+                            "name" : "Splitting Product Backlog Items",
+                            "description" : "Small things get done faster. In agile development there is a continuous and relentless drive to reduce the size of backlog items by splitting bigger items into smaller ones",
+                            "alpha" : [],
+                            "activity" : [],
+                            "competencies" : [],
+                        }
+                    ]
+                }
+            ],
+            "extensionElements" : []
+        } ;
+
+        //TODO data_dynamic
+        var data_json_dynamic = {
+            "name_id" : "",
+            "name" : "",
+            "description" : "",
+            "intention" : [],
+            "activitySpace" : [],
+            "alpha": [],
+            "competencies": [],
+            "patterns": [],
+            "extensionElements": []
+
+        };
+
+        var jsonse = JSON.stringify(data_json);
+        const file = new Blob([jsonse], {type: 'application/json'});
+        element.href = URL.createObjectURL(file);
+        element.download = "MethodEssence.json";
+        document.body.appendChild(element); // Required for this to work in FireFox
+        element.click();
     }
 
     addAlpha() {
@@ -247,7 +609,7 @@ export default class Editor extends Component {
             name: 'New Work Product',
             type: 'WorkProduct',
             x: 500,
-            y: 240,
+            y: 280,
             width: 80,
             height: 30,
             style: 'WorkProduct'
@@ -447,7 +809,7 @@ export default class Editor extends Component {
             // Enables rubberband (marquee) selection and a handler for basic keystrokes
             var rubberband = new mxRubberband(this.state.graph_global);
             var keyHandler = new mxKeyHandler(this.state.graph_global);
-
+            var connectionHandler = new mxConnectionHandler(this.state.graph_global)
 
 
 
@@ -463,8 +825,11 @@ export default class Editor extends Component {
                 if (graph.isEnabled())
                 {
                     let kernel_data_detail = graph.getSelectionCell()
-                    detail.detail_data = kernel_data_detail
-                    detail.openModal();
+                    if (kernel_data_detail != undefined) {
+                        detail.detail_data = kernel_data_detail
+                        detail.openModal();
+                    }
+
                 }
 
 
@@ -596,6 +961,27 @@ export default class Editor extends Component {
                 }
             });
 
+            //handle when click is released
+
+            connectionHandler.mouseUp = function () {
+                if (graph.isEnabled())
+                {
+
+
+                }
+            }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         }
@@ -604,8 +990,7 @@ export default class Editor extends Component {
         return (
             <div>
                 <div className="topnav">
-                    <a className="active" href="#home">Home</a>
-                    <a href="#news">News</a>
+                    <button onClick={this.toJSON}><img src={Json}  /></button>
 
                 </div>
                 <div className="sidenav">

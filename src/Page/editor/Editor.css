@@ -6,7 +6,7 @@
     z-index: 1;
     top: 50px;
     left: 0;
-    background-color: rosybrown;
+    background-color: #1d221e;
     overflow-x: hidden;
     padding-top: 40px;
 }
@@ -25,9 +25,9 @@
 
 /* Add a black background color to the top navigation */
 .topnav {
-    background-color: #333;
+    background-color: #1d221e;
     overflow: hidden;
-    height: 50px;
+    height: 100%;
     padding-left: 160px;
 
 }

@@ -1,6 +1,8 @@
 .App {
   text-align: center;
   position: fixed;
+  width: 100%;
+
 }
 
 .App-logo {
@@ -20,6 +22,7 @@
 }
 
 .App-body {
+  width: 100%;
   background-color: #282c34;
   min-height: 100vh;
   display: flex;

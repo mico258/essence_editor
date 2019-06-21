@@ -40,7 +40,8 @@ class NewMethod extends Component {
             name: '',
             description: '',
             author: '',
-            createdMethod: false
+            createdMethod: false,
+            intention: []
         }
     }
 
@@ -68,6 +69,12 @@ class NewMethod extends Component {
                                fullWidth
                                label="Method Description"
                                name="description">
+                    </TextField>
+                    <br/>
+                    <TextField id="intention"
+                               fullWidth
+                               label="Intention"
+                               name="intention">
                     </TextField>
                     <br/>
                     <TextField id="author"
