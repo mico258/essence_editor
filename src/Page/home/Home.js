@@ -56,15 +56,16 @@ class Home extends Component {
                     <span>
 
                 </span>
+                    {this.state.methodList.map((value, key) =>
+                        <Grid><a href={'/editor/'+value.id}>{value.name}</a></Grid>
+                    )}
+                    <Modal open={this.state.openForm} onClose={this.handleClose.bind(this)}>
+                        <NewMethod/>
+                    </Modal>
+                    <Button variant="contained" color="primary" onClick={this.openModal.bind(this)}>New Method</Button>
                 </header>
                 <body className="App-body">
-                {this.state.methodList.map((value, key) =>
-                    <Grid><a href={'/editor/'+value.id}>{value.name}</a></Grid>
-                )}
-                <Modal open={this.state.openForm} onClose={this.handleClose.bind(this)}>
-                    <NewMethod/>
-                </Modal>
-                <Button variant="contained" color="primary" onClick={this.openModal.bind(this)}>New Method</Button>
+
 
                 </body>
 

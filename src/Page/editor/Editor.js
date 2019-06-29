@@ -966,10 +966,11 @@ export default class Editor extends Component {
             connectionHandler.mouseUp = function () {
                 if (graph.isEnabled())
                 {
-
-
+                    // graph.model.setValue(graph.getSelectionCell(),"Change Var");
                 }
             }
+
+
 
 
 
@@ -1006,7 +1007,7 @@ export default class Editor extends Component {
                 </div>
 
                 <Modal open={this.state.openForm} onClose={this.handleClose.bind(this)} >
-                    <KernelDetail essence_kernel={this.detail_data}/>
+                    <KernelDetail essence_kernel={this.detail_data} graph_global={this.state.graph_global}/>
                 </Modal>
             </div>
 

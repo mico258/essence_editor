@@ -36,6 +36,8 @@ const styles = theme => ({
 class NewMethod extends Component {
     constructor(props) {
         super(props);
+
+        this.data = this.props.essence_kernel;
         this.state = {
             name: 'TEST',
             description: '',
@@ -53,6 +55,41 @@ class NewMethod extends Component {
         }
     }
 
+    updateState (event) {
+        let field = event.target.name;
+        this.state[field] = event.target.value
+    }
+
+    saveAlpha() {
+
+        this.props.graph_global.cellLabelChanged(this.props.essence_kernel, this.state.alpha_name)
+        // this.state.graph.cellLabelChanged(this.state.data, "Change Test");
+    }
+
+    saveActivitySpace() {
+
+        this.props.graph_global.cellLabelChanged(this.props.essence_kernel, this.state.activity_space_name)
+        // this.state.graph.cellLabelChanged(this.state.data, "Change Test");
+    }
+
+    saveActivity() {
+
+        this.props.graph_global.cellLabelChanged(this.props.essence_kernel, this.state.activity_name)
+        // this.state.graph.cellLabelChanged(this.state.data, "Change Test");
+    }
+
+    saveCompetency() {
+
+        this.props.graph_global.cellLabelChanged(this.props.essence_kernel, this.state.competency_name)
+        // this.state.graph.cellLabelChanged(this.state.data, "Change Test");
+    }
+
+    saveWorkProduct() {
+
+        this.props.graph_global.cellLabelChanged(this.props.essence_kernel, this.state.work_product_name)
+        // this.state.graph.cellLabelChanged(this.state.data, "Change Test");
+    }
+
     render() {
         const { classes }= this.props;
         const data = this.props.essence_kernel;
@@ -62,19 +99,21 @@ class NewMethod extends Component {
                 return (
                     <div className={classes.paper}>Edit Detail
 
-                        <TextField id="name"
+                        <TextField id="alpha_name"
                                    fullWidth
                                    label="Alpha Name"
-                                   name="name"
+                                   name="alpha_name"
+                                   onChange={this.updateState.bind(this)}
                                    defaultValue={data.value}
                         >
                         </TextField>
                         <br/>
 
-                        <TextField id="description"
+                        <TextField id="alpha_description"
                                    fullWidth
                                    label="Alpha Description"
-                                   name="description">
+                                   onChange={this.updateState.bind(this)}
+                                   name="alpha_description">
                         </TextField>
                         <br/>
                         State :
@@ -82,7 +121,7 @@ class NewMethod extends Component {
                         Sub Alpha :
                         <br/>
 
-                        <Button onClick={this.validate.bind(this)}>
+                        <Button onClick={this.saveAlpha.bind(this)}>
                             Save
                         </Button>
                     </div>
@@ -96,6 +135,7 @@ class NewMethod extends Component {
                                    fullWidth
                                    label="Competency Name"
                                    name="competency_name"
+                                   onChange={this.updateState.bind(this)}
                                    defaultValue={data.value}
                         >
                         </TextField>
@@ -104,6 +144,7 @@ class NewMethod extends Component {
                         <TextField id="competency_description"
                                    fullWidth
                                    label="Competency Description"
+                                   onChange={this.updateState.bind(this)}
                                    name="competency_description"
                         >
                         </TextField>
@@ -119,7 +160,7 @@ class NewMethod extends Component {
                         <input type="checkbox" name="Innovates" value="Innovates"/>Innovates
                         <br/>
                         <br/>
-                        <Button onClick={this.validate.bind(this)} color="primary">
+                        <Button onClick={this.saveCompetency.bind(this)} color="primary">
                             Save Data
                         </Button>
                     </div>
@@ -133,6 +174,7 @@ class NewMethod extends Component {
                                    fullWidth
                                    label="Activity Name"
                                    name="activity_name"
+                                   onChange={this.updateState.bind(this)}
                                    defaultValue={data.value}
                         >
                         </TextField>
@@ -140,6 +182,7 @@ class NewMethod extends Component {
                         <br/>
                         <TextField id="activity_description"
                                    fullWidth
+                                   onChange={this.updateState.bind(this)}
                                    label="Activity Description"
                                    name="activity_description"
                         >
@@ -161,7 +204,7 @@ class NewMethod extends Component {
 
                         <br/>
                         <br/>
-                        <Button onClick={this.validate.bind(this)} color="primary">
+                        <Button onClick={this.saveActivity.bind(this)} color="primary">
                             Save Data
                         </Button>
                     </div>
@@ -175,6 +218,7 @@ class NewMethod extends Component {
                                    fullWidth
                                    label="Activity Space Name"
                                    name="activity_space_name"
+                                   onChange={this.updateState.bind(this)}
                                    defaultValue={data.value}
                         >
                         </TextField>
@@ -184,6 +228,7 @@ class NewMethod extends Component {
                                    fullWidth
                                    label="Activity Space Description"
                                    name="activity_space_description"
+                                   onChange={this.updateState.bind(this)}
                         >
                         </TextField>
                         <br/>
@@ -195,7 +240,7 @@ class NewMethod extends Component {
 
                         <br/>
                         <br/>
-                        <Button onClick={this.validate.bind(this)} color="primary">
+                        <Button onClick={this.saveActivitySpace.bind(this)} color="primary">
                             Save Data
                         </Button>
                     </div>
@@ -210,12 +255,14 @@ class NewMethod extends Component {
                                    label="Work Product Name"
                                    name="work_product_name"
                                    defaultValue={data.value}
+                                   onChange={this.updateState.bind(this)}
                         >
                         </TextField>
                         <br/>
                         <br/>
                         <TextField id="work_product_description"
                                    fullWidth
+                                   onChange={this.updateState.bind(this)}
                                    label="Work Product Description"
                                    name="work_product_description"
                         >
@@ -224,13 +271,14 @@ class NewMethod extends Component {
                         <br/>
                         <TextField id="work_product_level_detail"
                                    fullWidth
+                                   onChange={this.updateState.bind(this)}
                                    label="Work Product Level Detail"
                                    name="work_product_level_detail"
                         >
                         </TextField>
                         <br/>
                         <br/>
-                        <Button onClick={this.validate.bind(this)} color="primary">
+                        <Button onClick={this.saveWorkProduct.bind(this)} color="primary">
                             Save Data
                         </Button>
                     </div>
@@ -244,6 +292,7 @@ class NewMethod extends Component {
                                    fullWidth
                                    label="Method Name"
                                    name="name"
+                                   onChange={this.updateState.bind(this)}
                                    defaultValue={data.value}
                         >
                         </TextField>
@@ -253,12 +302,14 @@ class NewMethod extends Component {
                         <br/>
                         <TextField id="description"
                                    fullWidth
+                                   onChange={this.updateState.bind(this)}
                                    label="Method Description"
                                    name="description">
                         </TextField>
                         <br/>
                         <TextField id="author"
                                    fullWidth
+                                   onChange={this.updateState.bind(this)}
                                    label="Creator"
                                    name="author">
                         </TextField>

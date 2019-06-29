@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles'
 import {Grid, Paper, TextField,} from '@material-ui/core';
 import Button from "@material-ui/core/Button/Button";
-import { Redirect } from 'react-router';
+import { Redirect, withRouter } from 'react-router';
 
 
 const styles = theme => ({
@@ -45,13 +45,17 @@ class NewMethod extends Component {
         }
     }
 
-    validate (event) {
-        event.preventDefault()
-        if (this.state.name === '' || this.state.description === '' || this.state.author === '') {
-            alert('All field is required')
-        } else {
-            return (<Redirect to='/' />);
-        }
+    validate () {
+        // if (this.state.name === '' || this.state.description === '' || this.state.author === '') {
+        //     alert('All field is required')
+        // } else {
+        //     return (<Redirect to='/editor/1' />);
+        // }
+        return <Redirect to='/editor/1' />
+    }
+
+    closeNewMthod (){
+        return (<Redirect to='/' />);
     }
 
     render() {
@@ -85,6 +89,10 @@ class NewMethod extends Component {
 
                     <Button onClick={this.validate.bind(this)}>
                         Create New Method
+                    </Button>
+
+                    <Button onClick={this.closeNewMthod.bind(this)}>
+                        Cancel
                     </Button>
                 </div>
 
