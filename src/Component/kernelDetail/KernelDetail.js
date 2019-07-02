@@ -61,33 +61,54 @@ class NewMethod extends Component {
     }
 
     saveAlpha() {
-
-        this.props.graph_global.cellLabelChanged(this.props.essence_kernel, this.state.alpha_name)
+        if (this.state.alpha_name) {
+            this.props.graph_global.cellLabelChanged(this.props.essence_kernel, this.state.alpha_name)
+            // this.state.graph.cellLabelChanged(this.state.data, "Change Test");
+            this.props.closeForm()
+        }
         // this.state.graph.cellLabelChanged(this.state.data, "Change Test");
+        this.props.closeForm()
     }
 
     saveActivitySpace() {
-
-        this.props.graph_global.cellLabelChanged(this.props.essence_kernel, this.state.activity_space_name)
+        if (this.state.activity_space_name) {
+            this.props.graph_global.cellLabelChanged(this.props.essence_kernel, this.state.activity_space_name)
+            // this.state.graph.cellLabelChanged(this.state.data, "Change Test");
+            this.props.closeForm()
+        }
         // this.state.graph.cellLabelChanged(this.state.data, "Change Test");
+        this.props.closeForm()
     }
 
     saveActivity() {
-
-        this.props.graph_global.cellLabelChanged(this.props.essence_kernel, this.state.activity_name)
+        if (this.state.activity_name) {
+            this.props.graph_global.cellLabelChanged(this.props.essence_kernel, this.state.activity_name)
+            // this.state.graph.cellLabelChanged(this.state.data, "Change Test");
+            this.props.closeForm()
+        }
         // this.state.graph.cellLabelChanged(this.state.data, "Change Test");
+        this.props.closeForm()
     }
 
     saveCompetency() {
-
-        this.props.graph_global.cellLabelChanged(this.props.essence_kernel, this.state.competency_name)
+        if (this.state.competency_name) {
+            this.props.graph_global.cellLabelChanged(this.props.essence_kernel, this.state.competency_name)
+            // this.state.graph.cellLabelChanged(this.state.data, "Change Test");
+            this.props.closeForm()
+        }
+        console.log(this.state.Applies)
         // this.state.graph.cellLabelChanged(this.state.data, "Change Test");
+        this.props.closeForm()
     }
 
     saveWorkProduct() {
-
-        this.props.graph_global.cellLabelChanged(this.props.essence_kernel, this.state.work_product_name)
+        if (this.state.work_product_name) {
+            this.props.graph_global.cellLabelChanged(this.props.essence_kernel, this.state.work_product_name)
+            // this.state.graph.cellLabelChanged(this.state.data, "Change Test");
+            this.props.closeForm()
+        }
         // this.state.graph.cellLabelChanged(this.state.data, "Change Test");
+        this.props.closeForm()
     }
 
     render() {
@@ -97,7 +118,7 @@ class NewMethod extends Component {
         if (data !=undefined) {
             if (data.style === 'Alpha') {
                 return (
-                    <div className={classes.paper}>Edit Detail
+                    <div className={classes.paper} >Edit Detail
 
                         <TextField id="alpha_name"
                                    fullWidth
@@ -153,11 +174,11 @@ class NewMethod extends Component {
                         Level
                         <br/>
                         <br/>
-                        <input type="checkbox" name="Assists" value="Assists"/>Assists
-                        <input type="checkbox" name="Applies" value="Applies"/>Applies
-                        <input type="checkbox" name="Masters" value="Masters"/>Masters
-                        <input type="checkbox" name="Adapt" value="Adapt"/>Adapt
-                        <input type="checkbox" name="Innovates" value="Innovates"/>Innovates
+                        <input defaultChecked={this.state.Assists !== undefined} type="checkbox" onChange={this.updateState.bind(this)} name="Assists" value="Assists"/>Assists
+                        <input defaultChecked={this.state.Applies !== undefined} type="checkbox" onChange={this.updateState.bind(this)} name="Applies" value="Applies"/>Applies
+                        <input defaultChecked={this.state.Masters !== undefined} type="checkbox" onChange={this.updateState.bind(this)} name="Masters" value="Masters"/>Masters
+                        <input defaultChecked={this.state.Adapt !== undefined} type="checkbox" onChange={this.updateState.bind(this)} name="Adapt" value="Adapt"/>Adapt
+                        <input defaultChecked={this.state.Innovates !== undefined} type="checkbox" onChange={this.updateState.bind(this)} name="Innovates" value="Innovates"/>Innovates
                         <br/>
                         <br/>
                         <Button onClick={this.saveCompetency.bind(this)} color="primary">

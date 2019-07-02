@@ -5,6 +5,7 @@ import {
     mxGraph,
     mxRubberband,
     mxKeyHandler,
+    mxUndoManager,
     mxEdgeHandler,
     mxVertexHandler,
     mxConnectionHandler,
@@ -28,6 +29,7 @@ import CompetencyPng from "../../Assets/EssenceKernel/Competency.png";
 import WorkProductPng from "../../Assets/EssenceKernel/Work_Product.png";
 import KernelDetail from "../../Component/kernelDetail/KernelDetail";
 import Modal from "@material-ui/core/Modal/Modal";
+import Button from "@material-ui/core/Button/Button";
 
 
 export default class Editor extends Component {
@@ -36,30 +38,8 @@ export default class Editor extends Component {
         this.state = {
             openForm : false,
             graph_global : null,
-            essence_component :[],
             detail_data : null,
             essence_kernel: [
-                {
-                  id :1 ,
-                  name: 'box1 ',
-                  x: 200,
-                  y: 120,
-                  width: 80,
-                  height: 30,
-                  style: 'fillColor=blue'
-
-
-                },
-                {
-                    id :2 ,
-                    name: 'box2',
-                    x: 300,
-                    y: 120,
-                    width: 80,
-                    height: 30,
-                    style: 'fillColor=yellow'
-                }
-
             ],
             edge: [
                 {
@@ -467,7 +447,7 @@ export default class Editor extends Component {
             style: 'Alpha'
         }
 
-        this.state.essence_kernel.push(newAlpha)
+
 
         var graph = this.state.graph_global;
 
@@ -485,8 +465,10 @@ export default class Editor extends Component {
             newAlpha.width,
             newAlpha.height,
             newAlpha.style);
-        this.state.essence_componen.push(a);
+        a.detail = {
+        }
 
+        this.state.essence_kernel.push(a);
 
         this.refreshGraph();
 
@@ -504,7 +486,6 @@ export default class Editor extends Component {
             style: 'Activity'
         }
 
-        this.state.essence_kernel.push(newActivity)
 
         var graph = this.state.graph_global;
 
@@ -522,7 +503,10 @@ export default class Editor extends Component {
             newActivity.width,
             newActivity.height,
             newActivity.style);
-        this.state.essence_componen.push(a);
+        a.detail = {
+        }
+
+        this.state.essence_kernel.push(a);
 
 
         this.refreshGraph();
@@ -541,7 +525,6 @@ export default class Editor extends Component {
             style: 'ActivitySpace'
         }
 
-        this.state.essence_kernel.push(newActivitySpace)
 
         var graph = this.state.graph_global;
 
@@ -559,7 +542,10 @@ export default class Editor extends Component {
             newActivitySpace.width,
             newActivitySpace.height,
             newActivitySpace.style);
-        this.state.essence_componen.push(a);
+        a.detail = {
+        }
+
+        this.state.essence_kernel.push(a);
 
 
         this.refreshGraph();
@@ -576,9 +562,9 @@ export default class Editor extends Component {
             width: 80,
             height: 30,
             style: 'Competency'
+
         }
 
-        this.state.essence_kernel.push(newCompetency)
 
         var graph = this.state.graph_global;
 
@@ -596,7 +582,10 @@ export default class Editor extends Component {
             newCompetency.width,
             newCompetency.height,
             newCompetency.style);
-        this.state.essence_componen.push(a);
+        a.detail = {
+        }
+
+        this.state.essence_kernel.push(a);
 
 
         this.refreshGraph();
@@ -615,7 +604,7 @@ export default class Editor extends Component {
             style: 'WorkProduct'
         }
 
-        this.state.essence_kernel.push(newWorkProduct)
+
 
         var graph = this.state.graph_global;
 
@@ -633,8 +622,10 @@ export default class Editor extends Component {
             newWorkProduct.width,
             newWorkProduct.height,
             newWorkProduct.style);
-        this.state.essence_componen.push(a);
+        a.detail = {
+        }
 
+        this.state.essence_kernel.push(a);
 
         this.refreshGraph();
 
@@ -773,10 +764,14 @@ export default class Editor extends Component {
                 //mxGrapg component
                 var doc = mxUtils.createXmlDocument();
                 var node = doc.createElement("Node");
-                node.setAttribute("ComponentID", "[P01]");
                 this.state.essence_componen = [];
                 for (var key in this.state.essence_kernel) {
                     var component = this.state.essence_kernel[key];
+
+
+
+
+
 
                     let a = this.state.graph_global.insertVertex(
                         parent,
@@ -786,8 +781,8 @@ export default class Editor extends Component {
                         component.y,
                         component.width,
                         component.height,
-                        'Alpha')
-                    this.state.essence_componen.push(a);
+                        component.style
+                        )
                 }
                 console.log(this.state.essence_componen)
                 // var e1 = graph.insertEdge(
@@ -817,6 +812,7 @@ export default class Editor extends Component {
             // keyboard backspace hit
             var graph = this.state.graph_global;
             var detail = this;
+            var state = this.state;
 
 
             // keyboard enter hit
@@ -824,7 +820,10 @@ export default class Editor extends Component {
             {
                 if (graph.isEnabled())
                 {
-                    let kernel_data_detail = graph.getSelectionCell()
+                    console.log(state)
+                    let kernel_data_detail = state.essence_kernel.filter(function (kernel) {
+                        return kernel.id === graph.getSelectionCell().id
+                    })
                     if (kernel_data_detail != undefined) {
                         detail.detail_data = kernel_data_detail
                         detail.openModal();
@@ -961,6 +960,20 @@ export default class Editor extends Component {
                 }
             });
 
+            var undoManager = new mxUndoManager();
+            console.log(undoManager)
+            var listener = function(sender, evt)
+            {
+                console.log(sender.cells)
+                undoManager.undoableEditHappened(evt.getProperty('edit'));
+            };
+            graph.getModel().addListener(mxEvent.UNDO, listener);
+            graph.getView().addListener(mxEvent.UNDO, listener);
+
+            keyHandler.bindKey(90, function (evt) {
+
+            })
+
             //handle when click is released
 
             connectionHandler.mouseUp = function () {
@@ -970,17 +983,22 @@ export default class Editor extends Component {
                 }
             }
 
+            connectionHandler.addListener(mxEvent.CONNECT, function(sender, evt)
+            {
+                // var edge = evt.getProperty('cell');
+                // var source = graph.getModel().getTerminal(edge, true);
+                // var target = graph.getModel().getTerminal(edge, false);
+                //
+                // var style = graph.getCellStyle(edge);
+                // var sourcePortId = style[mxConstants.STYLE_SOURCE_PORT];
+                // var targetPortId = style[mxConstants.STYLE_TARGET_PORT];
+                var edge = evt.getProperty('cell');
+                var source = graph.getModel().getTerminal(edge, true);
+                var target = graph.getModel().getTerminal(edge, false);
 
+                console.log(source)
 
-
-
-
-
-
-
-
-
-
+            });
 
 
 
@@ -989,7 +1007,7 @@ export default class Editor extends Component {
     }
     render() {
         return (
-            <div>
+            <div className="Background">
                 <div className="topnav">
                     <button onClick={this.toJSON}><img src={Json}  /></button>
 
@@ -1001,13 +1019,14 @@ export default class Editor extends Component {
                     <button onClick={this.addCompetency}><img src={CompetencyPng}/></button>
                     <button onClick={this.addWorkProduct}><img src={WorkProductPng}/></button>
                 </div>
-                <div className="App" id="page-wrap">
+                <div className="Base" >
 
                     <div className="graph-container" ref="divGraph" id="divGraph" />
                 </div>
 
                 <Modal open={this.state.openForm} onClose={this.handleClose.bind(this)} >
-                    <KernelDetail essence_kernel={this.detail_data} graph_global={this.state.graph_global}/>
+                    <KernelDetail essence_kernel={this.detail_data} graph_global={this.state.graph_global} closeForm={this.handleClose.bind(this)}/>
+
                 </Modal>
             </div>
 
