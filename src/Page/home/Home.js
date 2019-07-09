@@ -4,7 +4,8 @@ import Grid from '@material-ui/core/Grid'
 import logo from "../../essence.png";
 import Modal from '@material-ui/core/Modal';
 import NewMethod from './../../Component/newMethod/NewMethod'
-import Button from 'react-bootstrap/Button'
+import Button from '@material-ui/core/Button';
+import {Redirect} from "react-router-dom";
 // import from '@material-ui'
 
 
@@ -43,6 +44,7 @@ class Home extends Component {
         })
     };
 
+
     render() {
         const { classes }= this.props;
         return (
@@ -60,9 +62,11 @@ class Home extends Component {
                         <Grid><a href={'/editor/'+value.id}>{value.name}</a></Grid>
                     )}
                     <Modal open={this.state.openForm} onClose={this.handleClose.bind(this)}>
-                        <NewMethod/>
+                        <NewMethod history={this.props.history}  cancel={this.handleClose.bind(this)}/>
                     </Modal>
+                    <br/>
                     <Button variant="contained" color="primary" onClick={this.openModal.bind(this)}>New Method</Button>
+
                 </header>
                 <body className="App-body">
 

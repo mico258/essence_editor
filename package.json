@@ -9,7 +9,7 @@
     "mxgraph": "^3.9.12",
     "mxgraph-js": "^1.0.1",
     "react": "^16.7.0",
-    "react-alert": "^5.4.0",
+    "react-alert": "^5.5.0",
     "react-bootstrap": "^1.0.0-beta.5",
     "react-burger-menu": "^2.6.10",
     "react-dom": "^16.7.0",

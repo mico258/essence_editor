@@ -55,26 +55,54 @@ class NewMethod extends Component {
         }
     }
 
+
     updateState (event) {
         let field = event.target.name;
         this.state[field] = event.target.value
     }
 
+    checkedState (event) {
+        let field = event.target.name;
+        if(event.target.checked) {
+            this.state[field] = event.target.value
+        } else {
+            this.state[field] = ''
+        }
+
+    }
+
     saveAlpha() {
+
+
+        let alpha_id = this.props.essence_kernel.id
         if (this.state.alpha_name) {
             this.props.graph_global.cellLabelChanged(this.props.essence_kernel, this.state.alpha_name)
             // this.state.graph.cellLabelChanged(this.state.data, "Change Test");
-            this.props.closeForm()
         }
+
+        if (this.state.alpha_description) {
+            this.props.essence_kernels.filter(function (data) {
+                return data.id = alpha_id
+            })[0].detail.description = this.state.alpha_description
+
+        }
+
         // this.state.graph.cellLabelChanged(this.state.data, "Change Test");
         this.props.closeForm()
     }
 
     saveActivitySpace() {
+
+        let activity_space_id = this.props.essence_kernel.id
         if (this.state.activity_space_name) {
             this.props.graph_global.cellLabelChanged(this.props.essence_kernel, this.state.activity_space_name)
             // this.state.graph.cellLabelChanged(this.state.data, "Change Test");
-            this.props.closeForm()
+        }
+        if (this.state.activity_space_description) {
+            this.props.essence_kernels.filter(function (data) {
+                return data.id = activity_space_id
+            })[0].detail.description = this.state.activity_space_description
+
         }
         // this.state.graph.cellLabelChanged(this.state.data, "Change Test");
         this.props.closeForm()
@@ -84,7 +112,14 @@ class NewMethod extends Component {
         if (this.state.activity_name) {
             this.props.graph_global.cellLabelChanged(this.props.essence_kernel, this.state.activity_name)
             // this.state.graph.cellLabelChanged(this.state.data, "Change Test");
-            this.props.closeForm()
+        }
+        let activity_id = this.props.essence_kernel.id
+
+        if (this.state.activity_description) {
+            this.props.essence_kernels.filter(function (data) {
+                return data.id = activity_id
+            })[0].detail.description = this.state.activity_description
+
         }
         // this.state.graph.cellLabelChanged(this.state.data, "Change Test");
         this.props.closeForm()
@@ -94,10 +129,23 @@ class NewMethod extends Component {
         if (this.state.competency_name) {
             this.props.graph_global.cellLabelChanged(this.props.essence_kernel, this.state.competency_name)
             // this.state.graph.cellLabelChanged(this.state.data, "Change Test");
-            this.props.closeForm()
         }
-        console.log(this.state.Applies)
-        // this.state.graph.cellLabelChanged(this.state.data, "Change Test");
+
+        let competency_id = this.props.essence_kernel.id
+        let competency_detail = this.props.essence_kernels.filter(function (data) {
+            return data.id = competency_id
+        })[0].detail
+
+
+        competency_detail.description = this.state.competency_description ? this.state.competency_description : ''
+
+
+        competency_detail.level.Assists =  this.state.Assists
+        competency_detail.level.Applies =  this.state.Applies
+        competency_detail.level.Masters =  this.state.Masters
+        competency_detail.level.Adapt =  this.state.Adapt
+        competency_detail.level.Innovates =  this.state.Innovates
+
         this.props.closeForm()
     }
 
@@ -105,7 +153,14 @@ class NewMethod extends Component {
         if (this.state.work_product_name) {
             this.props.graph_global.cellLabelChanged(this.props.essence_kernel, this.state.work_product_name)
             // this.state.graph.cellLabelChanged(this.state.data, "Change Test");
-            this.props.closeForm()
+        }
+        let work_product_id = this.props.essence_kernel.id
+
+        if (this.state.work_product_description) {
+            this.props.essence_kernels.filter(function (data) {
+                return data.id = work_product_id
+            })[0].detail.description = this.state.work_product_description
+
         }
         // this.state.graph.cellLabelChanged(this.state.data, "Change Test");
         this.props.closeForm()
@@ -134,6 +189,7 @@ class NewMethod extends Component {
                                    fullWidth
                                    label="Alpha Description"
                                    onChange={this.updateState.bind(this)}
+                                   defaultValue={data.detail.description}
                                    name="alpha_description">
                         </TextField>
                         <br/>
@@ -149,6 +205,11 @@ class NewMethod extends Component {
 
                 );
             } else if (data.style === 'Competency') {
+                this.state.Assists = data.detail.level.Assists ;
+                this.state.Applies = data.detail.level.Applies ;
+                this.state.Masters = data.detail.level.Masters ;
+                this.state.Adapt = data.detail.level.Adapt ;
+                this.state.Innovates = data.detail.level.Innovates ;
                 return (
                     <div className={classes.paper}>Edit Competency Detail
                         <br/><br/>
@@ -166,6 +227,7 @@ class NewMethod extends Component {
                                    fullWidth
                                    label="Competency Description"
                                    onChange={this.updateState.bind(this)}
+                                   defaultValue={data.detail.description}
                                    name="competency_description"
                         >
                         </TextField>
@@ -174,11 +236,11 @@ class NewMethod extends Component {
                         Level
                         <br/>
                         <br/>
-                        <input defaultChecked={this.state.Assists !== undefined} type="checkbox" onChange={this.updateState.bind(this)} name="Assists" value="Assists"/>Assists
-                        <input defaultChecked={this.state.Applies !== undefined} type="checkbox" onChange={this.updateState.bind(this)} name="Applies" value="Applies"/>Applies
-                        <input defaultChecked={this.state.Masters !== undefined} type="checkbox" onChange={this.updateState.bind(this)} name="Masters" value="Masters"/>Masters
-                        <input defaultChecked={this.state.Adapt !== undefined} type="checkbox" onChange={this.updateState.bind(this)} name="Adapt" value="Adapt"/>Adapt
-                        <input defaultChecked={this.state.Innovates !== undefined} type="checkbox" onChange={this.updateState.bind(this)} name="Innovates" value="Innovates"/>Innovates
+                        <input defaultChecked={data.detail.level.Assists } type="checkbox" onChange={this.checkedState.bind(this)} name="Assists" value="Assists"/>Assists
+                        <input defaultChecked={data.detail.level.Applies } type="checkbox" onChange={this.checkedState.bind(this)} name="Applies" value="Applies"/>Applies
+                        <input defaultChecked={data.detail.level.Masters } type="checkbox" onChange={this.checkedState.bind(this)} name="Masters" value="Masters"/>Masters
+                        <input defaultChecked={data.detail.level.Adapt } type="checkbox" onChange={this.checkedState.bind(this)} name="Adapt" value="Adapt"/>Adapt
+                        <input defaultChecked={data.detail.level.Innovates } type="checkbox" onChange={this.checkedState.bind(this)} name="Innovates" value="Innovates"/>Innovates
                         <br/>
                         <br/>
                         <Button onClick={this.saveCompetency.bind(this)} color="primary">
@@ -196,6 +258,7 @@ class NewMethod extends Component {
                                    label="Activity Name"
                                    name="activity_name"
                                    onChange={this.updateState.bind(this)}
+
                                    defaultValue={data.value}
                         >
                         </TextField>
@@ -204,6 +267,7 @@ class NewMethod extends Component {
                         <TextField id="activity_description"
                                    fullWidth
                                    onChange={this.updateState.bind(this)}
+                                   defaultValue={data.detail.description}
                                    label="Activity Description"
                                    name="activity_description"
                         >
@@ -249,6 +313,7 @@ class NewMethod extends Component {
                                    fullWidth
                                    label="Activity Space Description"
                                    name="activity_space_description"
+                                   defaultValue={data.detail.description}
                                    onChange={this.updateState.bind(this)}
                         >
                         </TextField>
@@ -286,6 +351,7 @@ class NewMethod extends Component {
                                    onChange={this.updateState.bind(this)}
                                    label="Work Product Description"
                                    name="work_product_description"
+                                   defaultValue={data.detail.description}
                         >
                         </TextField>
                         <br/>
@@ -295,6 +361,7 @@ class NewMethod extends Component {
                                    onChange={this.updateState.bind(this)}
                                    label="Work Product Level Detail"
                                    name="work_product_level_detail"
+
                         >
                         </TextField>
                         <br/>
@@ -317,23 +384,7 @@ class NewMethod extends Component {
                                    defaultValue={data.value}
                         >
                         </TextField>
-                        XXXXXXX
-                        <br/>
-                        {data.value}
-                        <br/>
-                        <TextField id="description"
-                                   fullWidth
-                                   onChange={this.updateState.bind(this)}
-                                   label="Method Description"
-                                   name="description">
-                        </TextField>
-                        <br/>
-                        <TextField id="author"
-                                   fullWidth
-                                   onChange={this.updateState.bind(this)}
-                                   label="Creator"
-                                   name="author">
-                        </TextField>
+
 
                         <Button onClick={this.validate.bind(this)}>
                             Save

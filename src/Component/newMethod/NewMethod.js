@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles'
 import {Grid, Paper, TextField,} from '@material-ui/core';
-import Button from "@material-ui/core/Button/Button";
-import { Redirect, withRouter } from 'react-router';
+import Button from "@material-ui/core/Button";
+import { Redirect } from 'react-router-dom';
+import { useAlert } from 'react-alert'
 
 
 const styles = theme => ({
@@ -32,30 +33,42 @@ const styles = theme => ({
         transform: `translate(-50%, -50%)`,
     },
 });
-
 class NewMethod extends Component {
+
     constructor(props) {
         super(props);
+
         this.state = {
             name: '',
             description: '',
             author: '',
             createdMethod: false,
-            intention: []
+            intention: [],
+            redirect: false
         }
     }
 
+
+
+
+
+
+
     validate () {
-        // if (this.state.name === '' || this.state.description === '' || this.state.author === '') {
-        //     alert('All field is required')
-        // } else {
-        //     return (<Redirect to='/editor/1' />);
-        // }
-        return <Redirect to='/editor/1' />
+        if (this.state.name === '' || this.state.intention === '' || this.state.description === '' || this.state.author === '') {
+            alert('All field is required')
+        } else {
+            this.props.history.push("editor/1");
+        }
+    }
+
+    updateState (event) {
+        let field = event.target.name;
+        this.state[field] = event.target.value
     }
 
     closeNewMthod (){
-        return (<Redirect to='/' />);
+        this.props.cancel()
     }
 
     render() {
@@ -66,32 +79,39 @@ class NewMethod extends Component {
                     <TextField id="name"
                                fullWidth
                                label="Method Name"
+                               onChange={this.updateState.bind(this)}
                                name="name">
                     </TextField>
                     <br/>
                     <TextField id="description"
                                fullWidth
                                label="Method Description"
+                               onChange={this.updateState.bind(this)}
                                name="description">
                     </TextField>
                     <br/>
                     <TextField id="intention"
                                fullWidth
                                label="Intention"
+                               onChange={this.updateState.bind(this)}
                                name="intention">
                     </TextField>
                     <br/>
                     <TextField id="author"
                                fullWidth
+                               onChange={this.updateState.bind(this)}
                                label="Creator"
                                name="author">
                     </TextField>
+                    <br/>
+                    <br/>
+                    <br/>
 
-                    <Button onClick={this.validate.bind(this)}>
+                    <Button variant="contained" color="primary" onClick={this.validate.bind(this)}>
                         Create New Method
                     </Button>
 
-                    <Button onClick={this.closeNewMthod.bind(this)}>
+                    <Button variant="contained" color="secondary" onClick={this.closeNewMthod.bind(this)}>
                         Cancel
                     </Button>
                 </div>

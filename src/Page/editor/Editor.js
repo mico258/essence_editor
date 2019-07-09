@@ -466,7 +466,12 @@ export default class Editor extends Component {
             newAlpha.height,
             newAlpha.style);
         a.detail = {
+            description : '',
+            workProduct: [],
+            state: [],
+            subAlpha: []
         }
+
 
         this.state.essence_kernel.push(a);
 
@@ -504,6 +509,17 @@ export default class Editor extends Component {
             newActivity.height,
             newActivity.style);
         a.detail = {
+            description: '',
+            completionCriterion: {
+                alphas: [],
+                workProduct: []
+            },
+            entryCriterion: {
+                alphas: [],
+                workProduct: []
+            },
+            competencies: []
+
         }
 
         this.state.essence_kernel.push(a);
@@ -543,6 +559,8 @@ export default class Editor extends Component {
             newActivitySpace.height,
             newActivitySpace.style);
         a.detail = {
+            description: '',
+            activity: [],
         }
 
         this.state.essence_kernel.push(a);
@@ -582,7 +600,16 @@ export default class Editor extends Component {
             newCompetency.width,
             newCompetency.height,
             newCompetency.style);
+
         a.detail = {
+            description : '',
+            level: {
+                Assists : '',
+                Applies: '',
+                Masters: '',
+                Adapt: '',
+                Innovates: ''
+            }
         }
 
         this.state.essence_kernel.push(a);
@@ -623,6 +650,8 @@ export default class Editor extends Component {
             newWorkProduct.height,
             newWorkProduct.style);
         a.detail = {
+            description: '',
+            level_of_detail: []
         }
 
         this.state.essence_kernel.push(a);
@@ -820,12 +849,13 @@ export default class Editor extends Component {
             {
                 if (graph.isEnabled())
                 {
-                    console.log(state)
+
                     let kernel_data_detail = state.essence_kernel.filter(function (kernel) {
                         return kernel.id === graph.getSelectionCell().id
                     })
+                    console.log(kernel_data_detail)
                     if (kernel_data_detail != undefined) {
-                        detail.detail_data = kernel_data_detail
+                        detail.detail_data = kernel_data_detail[0]
                         detail.openModal();
                     }
 
@@ -996,7 +1026,7 @@ export default class Editor extends Component {
                 var source = graph.getModel().getTerminal(edge, true);
                 var target = graph.getModel().getTerminal(edge, false);
 
-                console.log(source)
+                console.log(this.state.essence_kernel)
 
             });
 
@@ -1025,7 +1055,7 @@ export default class Editor extends Component {
                 </div>
 
                 <Modal open={this.state.openForm} onClose={this.handleClose.bind(this)} >
-                    <KernelDetail essence_kernel={this.detail_data} graph_global={this.state.graph_global} closeForm={this.handleClose.bind(this)}/>
+                    <KernelDetail essence_kernels= {this.state.essence_kernel} essence_kernel={this.detail_data} graph_global={this.state.graph_global} closeForm={this.handleClose.bind(this)}/>
 
                 </Modal>
             </div>
