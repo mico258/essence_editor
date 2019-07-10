@@ -196,6 +196,9 @@ class NewMethod extends Component {
                         State :
                         <br/>
                         Sub Alpha :
+                        {data.detail.subAlpha.map((alpha, key) =>
+                            <li>{alpha.value}</li>
+                        )}
                         <br/>
 
                         <Button onClick={this.saveAlpha.bind(this)}>
@@ -275,18 +278,38 @@ class NewMethod extends Component {
                         <br/>
                         <br/>
 
-                        Complete Criterion :
-
+                        Complete Criterion :<br/>
+                            Alpha :
+                            <br/>
+                            {data.detail.completionCriterion.alphas.map((alpha, key) =>
+                                <li>{alpha.value}</li>
+                            )}
+                            Work Product :
+                            <br/>
+                            {data.detail.completionCriterion.workProduct.map((data, key) =>
+                                <li>{data.value}</li>
+                            )}
                         <br/>
                         <br/>
 
-                        Entry Criterion :
-
+                        Entry Criterion :<br/>
+                            Alpha :
+                            <br/>
+                            {data.detail.entryCriterion.alphas.map((alpha, key) =>
+                                <li>{alpha.value}</li>
+                            )}
+                            Work Product :
+                            <br/>
+                            {data.detail.entryCriterion.workProduct.map((data, key) =>
+                                <li>{data.value}</li>
+                            )}
                         <br/>
                         <br/>
 
                         Competencies :
-
+                        {data.detail.competencies.map((value, key) =>
+                            <li>{value}</li>
+                        )}
                         <br/>
                         <br/>
                         <Button onClick={this.saveActivity.bind(this)} color="primary">
@@ -323,7 +346,9 @@ class NewMethod extends Component {
                         Activity List
                         <br/>
                         <br/>
-
+                        {data.detail.activity.map((activity, key) =>
+                            <li>{activity.value}</li>
+                        )}
                         <br/>
                         <br/>
                         <Button onClick={this.saveActivitySpace.bind(this)} color="primary">

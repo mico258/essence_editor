@@ -6,6 +6,7 @@ import {
     mxRubberband,
     mxKeyHandler,
     mxUndoManager,
+    mxEditor,
     mxEdgeHandler,
     mxVertexHandler,
     mxConnectionHandler,
@@ -42,13 +43,6 @@ export default class Editor extends Component {
             essence_kernel: [
             ],
             edge: [
-                {
-                    id:1,
-                    name:'edge test',
-                    from: '',
-                    to: '',
-                }
-
             ]
         };
 
@@ -469,7 +463,9 @@ export default class Editor extends Component {
             description : '',
             workProduct: [],
             state: [],
-            subAlpha: []
+            subAlpha: [],
+            isSubAlpha: false,
+            hasSubAlpha: false
         }
 
 
@@ -741,11 +737,13 @@ export default class Editor extends Component {
             this.state.graph_global.setTooltips(true);
             this.state.graph_global.setConnectable(true);
             this.state.graph_global.setEnabled(true);
-            this.state.graph_global.setEdgeLabelsMovable(true);
-            this.state.graph_global.setVertexLabelsMovable(true);
+            this.state.graph_global.setEdgeLabelsMovable(false);
+            this.state.graph_global.setVertexLabelsMovable(false);
             this.state.graph_global.setGridEnabled(true);
             this.state.graph_global.setAllowDanglingEdges(false);
             // graph.splitEnabled = false;
+
+
 
 
 
@@ -793,7 +791,6 @@ export default class Editor extends Component {
                 //mxGrapg component
                 var doc = mxUtils.createXmlDocument();
                 var node = doc.createElement("Node");
-                this.state.essence_componen = [];
                 for (var key in this.state.essence_kernel) {
                     var component = this.state.essence_kernel[key];
 
@@ -813,7 +810,25 @@ export default class Editor extends Component {
                         component.style
                         )
                 }
-                console.log(this.state.essence_componen)
+
+                for (var key in this.state.edge) {
+                    var component = this.state.essence_kernel[key];
+
+
+
+
+
+
+                    let a = this.state.graph_global.insertEdge(
+                        parent,
+                        component.id,
+                        component.value,
+                        component.source,
+                        component.target,
+                        component.style
+                    )
+                }
+
                 // var e1 = graph.insertEdge(
                 //     parent,
                 //     null,
@@ -833,15 +848,186 @@ export default class Editor extends Component {
             // Enables rubberband (marquee) selection and a handler for basic keystrokes
             var rubberband = new mxRubberband(this.state.graph_global);
             var keyHandler = new mxKeyHandler(this.state.graph_global);
-            var connectionHandler = new mxConnectionHandler(this.state.graph_global)
-
 
 
 
             // keyboard backspace hit
             var graph = this.state.graph_global;
+
+
+            var connectionHandler = new mxConnectionHandler(graph)
+
+            //Handle Connection Edge
+
             var detail = this;
             var state = this.state;
+
+            graph.connectionHandler.addListener(mxEvent.CONNECT, function(sender, evt)
+            {
+                var edge = evt.getProperty('cell');
+                var source = graph.getModel().getTerminal(edge, true);
+                var target = graph.getModel().getTerminal(edge, false);
+
+
+                if( source.style === "ActivitySpace" ) {
+
+                    graph.getModel().remove(edge)
+
+                    alert("Activity Space tidak boleh mengarah ke essence kernel manapun")
+                }
+
+                if( target.style === "WorkProduct" && source.style!= "Activity") {
+
+                    graph.getModel().remove(edge)
+
+                    alert("Hanya Activity yang boleh mengarah ke work product")
+                }
+                //Constrain Untuk Competency
+                // console.log('connect '+ edge +' '+ source.id+' '+target.id+' '+sourcePortId+' '+ targetPortId);
+                if( (source.style === "Competency" && target.style === "WorkProduct" ) ||
+                    (source.style === "WorkProduct" && target.style === "Competency" )) {
+
+                    graph.getModel().remove(edge)
+
+                    alert("Competency dan Work Product tidak boleh saling terhubung")
+                }
+
+                // console.log('connect '+ edge +' '+ source.id+' '+target.id+' '+sourcePortId+' '+ targetPortId);
+                if( (source.style === "Competency" && target.style === "ActivitySpace" ) ||
+                    (source.style === "ActivitySpace" && target.style === "Competency" )) {
+
+                    graph.getModel().remove(edge)
+
+                    alert("Competency dan Activity Space tidak boleh saling terhubung")
+                }
+
+                if( source.style === "Activity" && target.style === "Competency" ) {
+
+                    graph.getModel().remove(edge)
+
+                    alert("Activity tidak boleh mengarah ke Competency")
+                }
+
+                if( source.style === "Activity" && target.style === "Alpha" ) {
+
+                    state.edge.push(edge);
+                    state.essence_kernel.filter(function (kernel) {
+                        return (kernel.id === source.id)
+                    })[0].detail.completionCriterion.alphas.push(source)
+                }
+
+                if( source.style === "Activity" && target.style === "WorkProduct" ) {
+
+                    state.edge.push(edge);
+                    state.essence_kernel.filter(function (kernel) {
+                        return (kernel.id === source.id)
+                    })[0].detail.completionCriterion.workProduct.push(source)
+                }
+
+                if( source.style === "Alpha" && target.style === "Activity" ) {
+
+                    state.edge.push(edge);
+                    state.essence_kernel.filter(function (kernel) {
+                        return (kernel.id === target.id)
+                    })[0].detail.entryCriterion.alphas.push(source)
+                }
+
+                if( source.style === "WorkProduct" && target.style === "Activity" ) {
+
+                    state.edge.push(edge);
+                    state.essence_kernel.filter(function (kernel) {
+                        return (kernel.id === target.id)
+                    })[0].detail.entryCriterion.workProduct.push(source)
+                }
+
+
+
+                if( source.style === "Competency" && target.style === "Competency" ) {
+
+                    graph.getModel().remove(edge)
+
+                    alert("Competency tidak boleh saling terhubung dengan sesama Competency")
+                }
+
+                if( source.style === "Activity" && target.style === "Activity" ) {
+
+                    graph.getModel().remove(edge)
+
+                    alert("Activity tidak boleh saling terhubung dengan sesama Activity")
+                }
+
+                if( source.style === "ActivitySpace" && target.style === "ActivitySpace" ) {
+
+                    graph.getModel().remove(edge)
+
+                    alert("Activity Space tidak boleh saling terhubung dengan sesama Activity Space")
+                }
+
+                if( source.style === "Activity" && target.style === "ActivitySpace" ) {
+
+                    let sourceAct = state.essence_kernel.filter(function (kernel) {
+                        return (kernel.id === source.id)
+                    })[0];
+
+                    let targetAct = state.essence_kernel.filter(function (kernel) {
+                        return (kernel.id === target.id)
+                    })[0];
+
+                    state.edge.push(edge)
+
+                    targetAct.detail.activity.push(sourceAct)
+                }
+
+                if( (source.style === "Competency" && target.style === "Alpha" ) ||
+                    (source.style === "Alpha" && target.style === "Competency" )) {
+
+                    graph.getModel().remove(edge)
+
+                    alert("Competency dan Alpha tidak boleh saling terhubung")
+                }
+
+                if( (source.style === "Competency" && target.style === "Activity" ) ) {
+
+                    state.edge.push(edge);
+                    state.essence_kernel.filter(function (kernel) {
+                        return (kernel.id === target.id)
+                    })[0].detail.competencies.push(source.value.toString())
+                }
+
+                if( source.style === "Alpha" && target.style === "Alpha" ) {
+
+                    let sourceAlpha = state.essence_kernel.filter(function (kernel) {
+                        return (kernel.id === source.id)
+                    })[0];
+
+                    let targetAlpha = state.essence_kernel.filter(function (kernel) {
+                        return (kernel.id === target.id)
+                    })[0];
+
+                    if(targetAlpha.detail.isSubAlpha) {
+                        graph.getModel().remove(edge)
+
+                        alert("Alpha tidak boleh menjadi sub Alpha dari sebuah sub Alpha")
+                    } else if(sourceAlpha.detail.hasSubAlpha){
+                        graph.getModel().remove(edge)
+
+                        alert("Alpha sudah memiliki sub Alpha")
+                    } else {
+                        sourceAlpha.detail.isSubAlpha = true
+                        targetAlpha.detail.hasSubAlpha = true
+                        state.edge.push(edge)
+                        targetAlpha.detail.subAlpha.push(sourceAlpha)
+                    }
+
+
+                }
+
+
+                console.log(state)
+                console.log(edge);
+            });
+
+
 
 
             // keyboard enter hit
@@ -850,19 +1036,24 @@ export default class Editor extends Component {
                 if (graph.isEnabled())
                 {
 
-                    let kernel_data_detail = state.essence_kernel.filter(function (kernel) {
-                        return kernel.id === graph.getSelectionCell().id
-                    })
-                    console.log(kernel_data_detail)
-                    if (kernel_data_detail != undefined) {
-                        detail.detail_data = kernel_data_detail[0]
-                        detail.openModal();
+                    if (graph.getSelectionCell()) {
+                        let kernel_data_detail = state.essence_kernel.filter(function (kernel) {
+                            return kernel.id === graph.getSelectionCell().id
+                        })
+                        console.log(kernel_data_detail)
+                        if (kernel_data_detail != undefined) {
+                            detail.detail_data = kernel_data_detail[0]
+                            detail.openModal();
+                        }
                     }
+
 
                 }
 
 
             });
+
+
 
 
             // keyboard backspace hit
@@ -881,7 +1072,7 @@ export default class Editor extends Component {
             {
                 if (graph.isEnabled())
                 {
-                    console.log(graph.getSelectionCell())
+
                     graph.removeCells();
                 }
             });
@@ -994,24 +1185,15 @@ export default class Editor extends Component {
             console.log(undoManager)
             var listener = function(sender, evt)
             {
-                console.log(sender.cells)
+                // console.log(sender.cells)
                 undoManager.undoableEditHappened(evt.getProperty('edit'));
             };
             graph.getModel().addListener(mxEvent.UNDO, listener);
             graph.getView().addListener(mxEvent.UNDO, listener);
 
-            keyHandler.bindKey(90, function (evt) {
 
-            })
 
-            //handle when click is released
 
-            connectionHandler.mouseUp = function () {
-                if (graph.isEnabled())
-                {
-                    // graph.model.setValue(graph.getSelectionCell(),"Change Var");
-                }
-            }
 
             connectionHandler.addListener(mxEvent.CONNECT, function(sender, evt)
             {
@@ -1019,16 +1201,22 @@ export default class Editor extends Component {
                 // var source = graph.getModel().getTerminal(edge, true);
                 // var target = graph.getModel().getTerminal(edge, false);
                 //
-                // var style = graph.getCellStyle(edge);
+                // var style = graph.getCellStyle(vertex);
                 // var sourcePortId = style[mxConstants.STYLE_SOURCE_PORT];
                 // var targetPortId = style[mxConstants.STYLE_TARGET_PORT];
                 var edge = evt.getProperty('cell');
-                var source = graph.getModel().getTerminal(edge, true);
-                var target = graph.getModel().getTerminal(edge, false);
+                // var source = graph.getModel().getTerminal(edge, true);
+                // var target = graph.getModel().getTerminal(edge, false);
 
-                console.log(this.state.essence_kernel)
+                //
+
+                console.log(edge)
 
             });
+
+
+
+
 
 
 
