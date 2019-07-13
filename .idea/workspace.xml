@@ -4,6 +4,8 @@
     <list default="true" id="5af54037-9329-454a-89e1-a5fdef6ccd9a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Component/kernelDetail/KernelDetail.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/kernelDetail/KernelDetail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Component/newMethod/NewMethod.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/newMethod/NewMethod.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Page/editor/Editor.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Page/editor/Editor.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Page/editor/Editor.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Page/editor/Editor.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -66,18 +68,18 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="css" value="297" />
+          <entry key="css" value="299" />
           <entry key="env" value="7" />
           <entry key="html" value="23" />
-          <entry key="js" value="11313" />
+          <entry key="js" value="12066" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key=".env file" value="7" />
-          <entry key="CSS" value="297" />
+          <entry key="CSS" value="299" />
           <entry key="HTML" value="23" />
-          <entry key="JavaScript" value="11312" />
+          <entry key="JavaScript" value="12065" />
           <entry key="RegExp" value="1" />
         </counts>
       </usages-collector>
@@ -88,8 +90,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Page/home/Home.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="274">
-              <caret line="60" column="20" lean-forward="true" selection-start-line="60" selection-start-column="20" selection-end-line="62" selection-end-column="22" />
+            <state relative-caret-position="-11">
+              <caret line="41" column="23" lean-forward="true" selection-start-line="41" selection-start-column="23" selection-end-line="41" selection-end-column="23" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -100,8 +102,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Component/newMethod/NewMethod.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="23">
-              <caret line="70" column="26" selection-start-line="70" selection-start-column="26" selection-end-line="70" selection-end-column="26" />
+            <state relative-caret-position="449">
+              <caret line="120" column="73" lean-forward="true" selection-start-line="120" selection-start-column="73" selection-end-line="120" selection-end-column="125" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -112,8 +114,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Page/editor/Editor.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="426">
-              <caret line="939" column="71" selection-start-line="939" selection-start-column="71" selection-end-line="939" selection-end-column="71" />
+            <state relative-caret-position="338">
+              <caret line="467" column="20" selection-start-line="467" selection-start-column="20" selection-end-line="467" selection-end-column="20" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -124,8 +126,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Component/kernelDetail/KernelDetail.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="353">
-              <caret line="303" column="41" selection-start-line="303" selection-start-column="41" selection-end-line="303" selection-end-column="41" />
+            <state relative-caret-position="1429">
+              <caret line="441" column="67" selection-start-line="441" selection-start-column="67" selection-end-line="441" selection-end-column="67" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -145,8 +147,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Page/editor/Editor.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="276">
-              <caret line="63" selection-start-line="63" selection-end-line="63" />
+            <state relative-caret-position="402">
+              <caret line="74" column="12" selection-start-line="74" selection-start-column="12" selection-end-line="74" selection-end-column="12" />
               <folding>
                 <element signature="e#1088#1725#2" expanded="true" />
               </folding>
@@ -174,14 +176,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>mxKeyHandler</find>
-      <find>refresh</find>
-      <find>page-wrap</find>
-      <find>hand</find>
-      <find>handle</find>
-      <find>essence_component</find>
-      <find>openModal</find>
-      <find>App</find>
       <find>detail_data</find>
       <find>sidenav</find>
       <find>mxEdgeHandler</find>
@@ -190,20 +184,28 @@
       <find>mxVertexHandler</find>
       <find>work_product</find>
       <find>mxEve</find>
-      <find>handleClose</find>
       <find>rubbe</find>
       <find>mxRubberband</find>
       <find>className</find>
       <find>console</find>
       <find>essence_kernel</find>
       <find>work</find>
-      <find>enter</find>
       <find>checkedState</find>
       <find>WorkProduct</find>
       <find>alpha</find>
       <find>filter</find>
       <find>activi</find>
       <find>ActivitySpace</find>
+      <find>closeForm</find>
+      <find>handleClose</find>
+      <find>enter</find>
+      <find>backs</find>
+      <find>handle</find>
+      <find>handleCl</find>
+      <find>id</find>
+      <find>addAlp</find>
+      <find>updateState</find>
+      <find>data</find>
     </findStrings>
     <replaceStrings>
       <replace>Essence</replace>
@@ -227,10 +229,10 @@
         <option value="$PROJECT_DIR$/src/Router.js" />
         <option value="$PROJECT_DIR$/src/Component/sideBar/SideBar.js" />
         <option value="$PROJECT_DIR$/src/App.css" />
-        <option value="$PROJECT_DIR$/src/Page/editor/Editor.css" />
         <option value="$PROJECT_DIR$/src/Page/home/Home.js" />
-        <option value="$PROJECT_DIR$/src/Component/newMethod/NewMethod.js" />
+        <option value="$PROJECT_DIR$/src/Page/editor/Editor.css" />
         <option value="$PROJECT_DIR$/src/Page/editor/Editor.js" />
+        <option value="$PROJECT_DIR$/src/Component/newMethod/NewMethod.js" />
         <option value="$PROJECT_DIR$/src/Component/kernelDetail/KernelDetail.js" />
       </list>
     </option>
@@ -251,7 +253,7 @@
       <path value="$PROJECT_DIR$/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="y" value="23" />
     <option name="width" value="1440" />
     <option name="height" value="820" />
@@ -404,12 +406,12 @@
       <workItem from="1558683307448" duration="14788000" />
       <workItem from="1559893788067" duration="21300000" />
       <workItem from="1561845968424" duration="9224000" />
-      <workItem from="1561955952839" duration="32803000" />
+      <workItem from="1561955952839" duration="46836000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="140198000" />
+    <option name="totallyTimeSpent" value="154231000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="820" extended-state="6" />
@@ -440,18 +442,6 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/Page/editor/Editor.js</url>
-          <line>864</line>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/serviceWorker.js">
@@ -554,12 +544,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Page/editor/Editor.css">
+    <entry file="file://$PROJECT_DIR$/src/Page/home/Home.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="63" selection-start-line="63" selection-end-line="63" />
+        <state relative-caret-position="-11">
+          <caret line="41" column="23" lean-forward="true" selection-start-line="41" selection-start-column="23" selection-end-line="41" selection-end-column="23" />
           <folding>
-            <element signature="e#1088#1725#2" expanded="true" />
+            <element signature="e#0#41#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -571,10 +561,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Page/home/Home.js">
+    <entry file="file://$PROJECT_DIR$/src/Page/editor/Editor.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
-          <caret line="60" column="20" lean-forward="true" selection-start-line="60" selection-start-column="20" selection-end-line="62" selection-end-column="22" />
+        <state relative-caret-position="402">
+          <caret line="74" column="12" selection-start-line="74" selection-start-column="12" selection-end-line="74" selection-end-column="12" />
+          <folding>
+            <element signature="e#1088#1725#2" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Page/editor/Editor.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="338">
+          <caret line="467" column="20" selection-start-line="467" selection-start-column="20" selection-end-line="467" selection-end-column="20" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
@@ -583,18 +583,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Component/newMethod/NewMethod.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="23">
-          <caret line="70" column="26" selection-start-line="70" selection-start-column="26" selection-end-line="70" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Page/editor/Editor.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="426">
-          <caret line="939" column="71" selection-start-line="939" selection-start-column="71" selection-end-line="939" selection-end-column="71" />
+        <state relative-caret-position="449">
+          <caret line="120" column="73" lean-forward="true" selection-start-line="120" selection-start-column="73" selection-end-line="120" selection-end-column="125" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
@@ -603,8 +593,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Component/kernelDetail/KernelDetail.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="353">
-          <caret line="303" column="41" selection-start-line="303" selection-start-column="41" selection-end-line="303" selection-end-column="41" />
+        <state relative-caret-position="1429">
+          <caret line="441" column="67" selection-start-line="441" selection-start-column="67" selection-end-line="441" selection-end-column="67" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>

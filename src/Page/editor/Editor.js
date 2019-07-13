@@ -63,9 +63,12 @@ export default class Editor extends Component {
     };
 
     handleClose() {
+
         this.setState({
-            openForm: false
+            openForm: false,
+            detail_data : null
         })
+
     };
 
     componentDidMount() {
@@ -522,6 +525,14 @@ export default class Editor extends Component {
 
 
         this.refreshGraph();
+
+    }
+
+    arrayRemove(value) {
+
+        this.state.essence_kernel = this.state.essence_kernel.filter(function(ele){
+            return ele != value;
+        });
 
     }
 
@@ -1037,9 +1048,12 @@ export default class Editor extends Component {
                 {
 
                     if (graph.getSelectionCell()) {
+
+                        let data = graph.getSelectionCell()
                         let kernel_data_detail = state.essence_kernel.filter(function (kernel) {
-                            return kernel.id === graph.getSelectionCell().id
+                            return kernel === graph.getSelectionCell()
                         })
+                        console.log(data)
                         console.log(kernel_data_detail)
                         if (kernel_data_detail != undefined) {
                             detail.detail_data = kernel_data_detail[0]
@@ -1062,7 +1076,11 @@ export default class Editor extends Component {
 
                 if (graph.isEnabled())
                 {
-                    console.log(graph.getSelectionCell())
+
+                    var kernel = graph.getSelectionCell()
+                    state.essence_kernel  = state.essence_kernel.filter(function(ele){
+                        return ele !== kernel;
+                    });
                     graph.removeCells();
                 }
             });
@@ -1072,7 +1090,10 @@ export default class Editor extends Component {
             {
                 if (graph.isEnabled())
                 {
-
+                    var kernel = graph.getSelectionCell()
+                    state.essence_kernel  = state.essence_kernel.filter(function(ele){
+                        return ele !== kernel;
+                    });
                     graph.removeCells();
                 }
             });

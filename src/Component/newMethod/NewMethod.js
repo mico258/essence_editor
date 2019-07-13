@@ -65,14 +65,22 @@ class NewMethod extends Component {
     updateState (event) {
         let field = event.target.name;
         this.state[field] = event.target.value
+
+        console.log(this.state)
+    }
+
+    updateIntention (event) {
+
     }
 
     closeNewMthod (){
+        console.log(this.state)
         this.props.cancel()
     }
 
     render() {
         const { classes }= this.props;
+        const intention = this.state.intention
         return (
                 <div className={classes.paper}>Make Your Own Method
 
@@ -85,17 +93,35 @@ class NewMethod extends Component {
                     <br/>
                     <TextField id="description"
                                fullWidth
+                               multiline
                                label="Method Description"
                                onChange={this.updateState.bind(this)}
                                name="description">
                     </TextField>
                     <br/>
-                    <TextField id="intention"
-                               fullWidth
-                               label="Intention"
-                               onChange={this.updateState.bind(this)}
-                               name="intention">
-                    </TextField>
+                    {this.state.intention.map((data, index) =>
+                        <TextField
+                            fullWidth
+                            key={index}
+                            value={data}
+                            label={"Method Intention "+ (index+1) }
+                            // onChange={event => this.state.intention[index] = event.target.value }
+                            onChange={event => this.setState({
+                                intention: [
+                                    ...intention.slice(0, index),
+                                    event.target.value,
+                                    ...intention.slice(index + 1)
+                                ]
+                            }) }    >
+                        </TextField>
+                    )}
+                    <br/>
+                    <br/>
+
+                    <Button variant="contained" color="primary" onClick={() => this.setState({intention: [...intention, '']})}>
+                        Add intention
+                    </Button>
+
                     <br/>
                     <TextField id="author"
                                fullWidth
