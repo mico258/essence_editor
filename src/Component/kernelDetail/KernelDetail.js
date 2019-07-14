@@ -3,6 +3,7 @@ import { withStyles } from '@material-ui/core/styles'
 import {Grid, Paper, TextField,} from '@material-ui/core';
 import Button from "@material-ui/core/Button/Button";
 import { Redirect } from 'react-router';
+import State from "../../Component/state/State";
 
 
 const styles = theme => ({
@@ -22,11 +23,13 @@ const styles = theme => ({
     },
     paper: {
         position: 'absolute',
+        overflow: 'scroll',
         width: theme.spacing.unit * 90,
         backgroundColor: theme.palette.background.paper,
         boxShadow: theme.shadows[5],
         padding: theme.spacing.unit * 4,
         outline: 'none',
+        height: '80%',
         top: '50%',
         left: '50%',
         transform: `translate(-50%, -50%)`,
@@ -43,6 +46,8 @@ class NewMethod extends Component {
             description: '',
             author: '',
             createdMethod: false,
+            alphaState : this.props.essence_kernel.detail.state ? this.props.essence_kernel.detail.state : []
+
         }
     }
 
@@ -86,6 +91,11 @@ class NewMethod extends Component {
             })[0].detail.description = this.state.alpha_description
 
         }
+
+        this.props.essence_kernels.filter(function (data) {
+            return data === alpha_id
+        })[0].detail.state = this.state.alphaState
+
 
         // this.state.graph.cellLabelChanged(this.state.data, "Change Test");
         this.props.closeForm()
@@ -166,12 +176,27 @@ class NewMethod extends Component {
         this.props.closeForm()
     }
 
+    setAlpha() {
+        console.log(this.props.essence_kernel.detail.state)
+        console.log("-----------")
+        console.log(this.state.alphaState)
+
+
+    }
+
     render() {
         const { classes }= this.props;
         const data = this.props.essence_kernel;
 
         if (data !=undefined) {
             if (data.style === 'Alpha') {
+                // const alphaState = this.props.essence_kernel.detail.state;
+
+                // this.state.alphaState = this.props.essence_kernel.detail.state
+                // this.state.alphaState = this.props.essence_kernel.detail.state;
+
+                var alphaState = this.state.alphaState;
+
                 return (
                     <div className={classes.paper} >Edit Detail
 
@@ -188,6 +213,7 @@ class NewMethod extends Component {
                         <TextField id="alpha_description"
                                    fullWidth
                                    multiline
+                                   rows={3}
                                    label="Alpha Description"
                                    onChange={this.updateState.bind(this)}
                                    defaultValue={data.detail.description}
@@ -195,25 +221,28 @@ class NewMethod extends Component {
                         </TextField>
                         <br/>
                         State :
-                        {data.detail.state.map((data, index) =>
-                            <TextField
-                                fullWidth
-                                key={index}
-                                value={data}
-                                label={"State "+ index+1 }
-                                // onChange={event => this.state.intention[index] = event.target.value }
-                                onChange={event =>
-                                    data.detail.state = [
-                                        ...data.detail.state.slice(0, index),
-                                        event.target.value,
-                                        ...data.detail.state.slice(index + 1)
-                                    ]
+                        <br/> <br/>
+                        {alphaState.map((alphaStateData, index) =>
+                            <State state = {alphaStateData} key = {index}>
+                                {/*<TextField*/}
+                                    {/*fullWidth*/}
+                                    {/*key={index}*/}
+                                    {/*value={alphaStateData.name}*/}
+                                    {/*label={"State "+ (index+1) }*/}
+                                    {/*// onChange={event => this.state.intention[index] = event.target.value }*/}
+                                       {/*/>*/}
+                            </State>
 
-                                     }    >
-                            </TextField>
+
+
+
                         )}
                         <br/>
-                        <Button variant="outlined" color="primary" onClick={() => this.setState({state: [...data.detail.state, '']})}>
+                        <Button variant="outlined" color="primary" onClick={() => this.setState({alphaState: [...alphaState, {
+                            name : '',
+                            description : '',
+                            checkList : []
+                            }]})}>
                             Add State
                         </Button>
                         <br/>
@@ -252,6 +281,7 @@ class NewMethod extends Component {
                         <TextField id="competency_description"
                                    fullWidth
                                    multiline
+                                   rows={3}
                                    label="Competency Description"
                                    onChange={this.updateState.bind(this)}
                                    defaultValue={data.detail.description}
@@ -294,6 +324,7 @@ class NewMethod extends Component {
                         <TextField id="activity_description"
                                    fullWidth
                                    multiline
+                                   rows={3}
                                    onChange={this.updateState.bind(this)}
                                    defaultValue={data.detail.description}
                                    label="Activity Description"
@@ -361,6 +392,7 @@ class NewMethod extends Component {
                         <TextField id="activity_space_description"
                                    fullWidth
                                    multiline
+                                   rows={3}
                                    label="Activity Space Description"
                                    name="activity_space_description"
                                    defaultValue={data.detail.description}
@@ -401,6 +433,7 @@ class NewMethod extends Component {
                         <TextField id="work_product_description"
                                    fullWidth
                                    multiline
+                                   rows={3}
                                    onChange={this.updateState.bind(this)}
                                    label="Work Product Description"
                                    name="work_product_description"

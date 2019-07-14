@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5af54037-9329-454a-89e1-a5fdef6ccd9a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Component/state/State.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Component/kernelDetail/KernelDetail.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/kernelDetail/KernelDetail.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Component/newMethod/NewMethod.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/newMethod/NewMethod.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Page/editor/Editor.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Page/editor/Editor.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Page/editor/Editor.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Page/editor/Editor.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -44,7 +44,7 @@
           <entry key="env" value="1" />
           <entry key="html" value="1" />
           <entry key="ico" value="1" />
-          <entry key="js" value="18" />
+          <entry key="js" value="19" />
           <entry key="json" value="1" />
           <entry key="png" value="2" />
           <entry key="svg" value="1" />
@@ -57,7 +57,7 @@
           <entry key="HTML" value="1" />
           <entry key="Image" value="3" />
           <entry key="JSON" value="1" />
-          <entry key="JavaScript" value="18" />
+          <entry key="JavaScript" value="19" />
           <entry key="SVG" value="1" />
         </counts>
       </usages-collector>
@@ -71,7 +71,7 @@
           <entry key="css" value="299" />
           <entry key="env" value="7" />
           <entry key="html" value="23" />
-          <entry key="js" value="12066" />
+          <entry key="js" value="12986" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
@@ -79,7 +79,7 @@
           <entry key=".env file" value="7" />
           <entry key="CSS" value="299" />
           <entry key="HTML" value="23" />
-          <entry key="JavaScript" value="12065" />
+          <entry key="JavaScript" value="12985" />
           <entry key="RegExp" value="1" />
         </counts>
       </usages-collector>
@@ -100,10 +100,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Component/newMethod/NewMethod.js">
+        <entry file="file://$PROJECT_DIR$/src/Page/editor/Editor.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="449">
-              <caret line="120" column="73" lean-forward="true" selection-start-line="120" selection-start-column="73" selection-end-line="120" selection-end-column="125" />
+            <state relative-caret-position="382">
+              <caret line="424" column="10" lean-forward="true" selection-start-line="424" selection-start-column="10" selection-end-line="424" selection-end-column="10" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -112,10 +112,22 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Page/editor/Editor.js">
+        <entry file="file://$PROJECT_DIR$/src/Component/newMethod/NewMethod.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="338">
-              <caret line="467" column="20" selection-start-line="467" selection-start-column="20" selection-end-line="467" selection-end-column="20" />
+            <state relative-caret-position="465">
+              <caret line="125" column="29" lean-forward="true" selection-start-line="103" selection-start-column="20" selection-end-line="125" selection-end-column="29" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Component/kernelDetail/KernelDetail.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="21">
+              <caret line="223" column="35" lean-forward="true" selection-start-line="223" selection-start-column="35" selection-end-line="223" selection-end-column="35" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -124,10 +136,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Component/kernelDetail/KernelDetail.js">
+        <entry file="file://$PROJECT_DIR$/src/Component/state/State.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1429">
-              <caret line="441" column="67" selection-start-line="441" selection-start-column="67" selection-end-line="441" selection-end-column="67" />
+            <state relative-caret-position="396">
+              <caret line="105" column="25" selection-start-line="105" selection-start-column="25" selection-end-line="105" selection-end-column="25" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -203,9 +215,9 @@
       <find>handle</find>
       <find>handleCl</find>
       <find>id</find>
+      <find>data</find>
       <find>addAlp</find>
       <find>updateState</find>
-      <find>data</find>
     </findStrings>
     <replaceStrings>
       <replace>Essence</replace>
@@ -234,6 +246,7 @@
         <option value="$PROJECT_DIR$/src/Page/editor/Editor.js" />
         <option value="$PROJECT_DIR$/src/Component/newMethod/NewMethod.js" />
         <option value="$PROJECT_DIR$/src/Component/kernelDetail/KernelDetail.js" />
+        <option value="$PROJECT_DIR$/src/Component/state/State.js" />
       </list>
     </option>
   </component>
@@ -314,6 +327,19 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Assets" type="462c0819:PsiDirectoryNode" />
               <item name="EssenceKernel" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="essence_editor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="essence_editor" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Component" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="essence_editor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="essence_editor" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Component" type="462c0819:PsiDirectoryNode" />
+              <item name="sideBar" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="essence_editor" type="b2602c69:ProjectViewProjectNode" />
@@ -406,18 +432,18 @@
       <workItem from="1558683307448" duration="14788000" />
       <workItem from="1559893788067" duration="21300000" />
       <workItem from="1561845968424" duration="9224000" />
-      <workItem from="1561955952839" duration="46836000" />
+      <workItem from="1561955952839" duration="56515000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="154231000" />
+    <option name="totallyTimeSpent" value="163910000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="820" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17569445" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17569445" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -431,7 +457,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.16021362" />
+      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.16021362" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -571,10 +597,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Component/kernelDetail/KernelDetail.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="21">
+          <caret line="223" column="35" lean-forward="true" selection-start-line="223" selection-start-column="35" selection-end-line="223" selection-end-column="35" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Page/editor/Editor.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="338">
-          <caret line="467" column="20" selection-start-line="467" selection-start-column="20" selection-end-line="467" selection-end-column="20" />
+        <state relative-caret-position="382">
+          <caret line="424" column="10" lean-forward="true" selection-start-line="424" selection-start-column="10" selection-end-line="424" selection-end-column="10" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
@@ -583,18 +619,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Component/newMethod/NewMethod.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="449">
-          <caret line="120" column="73" lean-forward="true" selection-start-line="120" selection-start-column="73" selection-end-line="120" selection-end-column="125" />
+        <state relative-caret-position="465">
+          <caret line="125" column="29" lean-forward="true" selection-start-line="103" selection-start-column="20" selection-end-line="125" selection-end-column="29" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Component/kernelDetail/KernelDetail.js">
+    <entry file="file://$PROJECT_DIR$/src/Component/state/State.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1429">
-          <caret line="441" column="67" selection-start-line="441" selection-start-column="67" selection-end-line="441" selection-end-column="67" />
+        <state relative-caret-position="396">
+          <caret line="105" column="25" selection-start-line="105" selection-start-column="25" selection-end-line="105" selection-end-column="25" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>

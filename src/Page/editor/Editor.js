@@ -1244,6 +1244,9 @@ export default class Editor extends Component {
 
         }
     }
+
+
+
     render() {
         return (
             <div className="Background">

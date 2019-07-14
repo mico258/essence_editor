@@ -22,6 +22,8 @@ const styles = theme => ({
         backgroundColor: '#00695C',
     },
     paper: {
+        overflow: 'scroll',
+        height: '80%',
         position: 'absolute',
         width: theme.spacing.unit * 50,
         backgroundColor: theme.palette.background.paper,
@@ -94,6 +96,7 @@ class NewMethod extends Component {
                     <TextField id="description"
                                fullWidth
                                multiline
+                               rows={3}
                                label="Method Description"
                                onChange={this.updateState.bind(this)}
                                name="description">
@@ -118,7 +121,7 @@ class NewMethod extends Component {
                     <br/>
                     <br/>
 
-                    <Button variant="contained" color="primary" onClick={() => this.setState({intention: [...intention, '']})}>
+                    <Button variant="outlined" color="primary" onClick={() => this.setState({intention: [...intention, '']})}>
                         Add intention
                     </Button>
 
