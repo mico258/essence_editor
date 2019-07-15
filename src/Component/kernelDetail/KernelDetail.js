@@ -49,6 +49,8 @@ class NewMethod extends Component {
             alphaState : this.props.essence_kernel.detail.state ? this.props.essence_kernel.detail.state : []
 
         }
+
+        this.saveStateAlpha = this.saveStateAlpha.bind(this);
     }
 
     validate (event) {
@@ -176,12 +178,8 @@ class NewMethod extends Component {
         this.props.closeForm()
     }
 
-    setAlpha() {
-        console.log(this.props.essence_kernel.detail.state)
-        console.log("-----------")
-        console.log(this.state.alphaState)
-
-
+    saveStateAlpha(index, data) {
+        this.state.alphaState[index] = data;
     }
 
     render() {
@@ -223,14 +221,9 @@ class NewMethod extends Component {
                         State :
                         <br/> <br/>
                         {alphaState.map((alphaStateData, index) =>
-                            <State state = {alphaStateData} key = {index}>
-                                {/*<TextField*/}
-                                    {/*fullWidth*/}
-                                    {/*key={index}*/}
-                                    {/*value={alphaStateData.name}*/}
-                                    {/*label={"State "+ (index+1) }*/}
-                                    {/*// onChange={event => this.state.intention[index] = event.target.value }*/}
-                                       {/*/>*/}
+
+                            <State state = {alphaStateData} key = {index} index={index} saveStateAlpha={this.saveStateAlpha}>
+
                             </State>
 
 

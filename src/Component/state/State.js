@@ -52,13 +52,18 @@ class State extends Component {
 
     }
 
+    saveStateAlpha() {
+
+        this.props.saveStateAlpha(this.props.index , this.state)
+    }
+
 
 
     render() {
         const { classes }= this.props;
         const checkList = this.state.checkList
         return (
-            <div >
+            <div onChange={this.saveStateAlpha.bind(this)}>
                 <TextField id="name"
                            fullWidth
                            label="State Name "
@@ -102,6 +107,7 @@ class State extends Component {
                 )}
                 <br/>
                 <br/>
+
                 <Fab color="primary" size="small">
                 <AddIcon  onClick={() => this.setState({checkList: [...checkList, '']})}>
                     Add Checklist
