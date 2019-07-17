@@ -699,7 +699,7 @@ export default class Editor extends Component {
         data_json_dynamic.intention = this.state.intention;
 
 
-        var jsonse = JSON.stringify(data_json_dynamic);
+        var jsonse = JSON.stringify(data_json_dynamic,0,4);
         const file = new Blob([jsonse], {type: 'application/json'});
         element.href = URL.createObjectURL(file);
         element.download = data_json_dynamic.name+".json";
