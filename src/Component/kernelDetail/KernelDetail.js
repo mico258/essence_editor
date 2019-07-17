@@ -46,7 +46,8 @@ class NewMethod extends Component {
             description: '',
             author: '',
             createdMethod: false,
-            alphaState : this.props.essence_kernel.detail.state ? this.props.essence_kernel.detail.state : []
+            alphaState : this.props.essence_kernel.detail.state ? this.props.essence_kernel.detail.state : [],
+            level_of_detail : this.props.essence_kernel.detail.level_of_detail ? this.props.essence_kernel.detail.level_of_detail : []
 
         }
 
@@ -81,21 +82,22 @@ class NewMethod extends Component {
     saveAlpha() {
 
 
-        let alpha_id = this.props.essence_kernel
+        let alpha_id = this.props.essence_kernel.id
         if (this.state.alpha_name) {
             this.props.graph_global.cellLabelChanged(this.props.essence_kernel, this.state.alpha_name)
             // this.state.graph.cellLabelChanged(this.state.data, "Change Test");
         }
 
+
         if (this.state.alpha_description) {
             this.props.essence_kernels.filter(function (data) {
-                return data === alpha_id
+                return data.id === alpha_id
             })[0].detail.description = this.state.alpha_description
 
         }
 
         this.props.essence_kernels.filter(function (data) {
-            return data === alpha_id
+            return data.id === alpha_id
         })[0].detail.state = this.state.alphaState
 
 
@@ -105,14 +107,14 @@ class NewMethod extends Component {
 
     saveActivitySpace() {
 
-        let activity_space_id = this.props.essence_kernel
+        let activity_space_id = this.props.essence_kernel.id
         if (this.state.activity_space_name) {
             this.props.graph_global.cellLabelChanged(this.props.essence_kernel, this.state.activity_space_name)
             // this.state.graph.cellLabelChanged(this.state.data, "Change Test");
         }
         if (this.state.activity_space_description) {
             this.props.essence_kernels.filter(function (data) {
-                return data === activity_space_id
+                return data.id === activity_space_id
             })[0].detail.description = this.state.activity_space_description
 
         }
@@ -125,11 +127,11 @@ class NewMethod extends Component {
             this.props.graph_global.cellLabelChanged(this.props.essence_kernel, this.state.activity_name)
             // this.state.graph.cellLabelChanged(this.state.data, "Change Test");
         }
-        let activity_id = this.props.essence_kernel
+        let activity_id = this.props.essence_kernel.id
 
         if (this.state.activity_description) {
             this.props.essence_kernels.filter(function (data) {
-                return data === activity_id
+                return data.id === activity_id
             })[0].detail.description = this.state.activity_description
 
         }
@@ -143,9 +145,9 @@ class NewMethod extends Component {
             // this.state.graph.cellLabelChanged(this.state.data, "Change Test");
         }
 
-        let competency_id = this.props.essence_kernel
+        let competency_id = this.props.essence_kernel.id
         let competency_detail = this.props.essence_kernels.filter(function (data) {
-            return data === competency_id
+            return data.id === competency_id
         })[0].detail
 
 
@@ -166,14 +168,18 @@ class NewMethod extends Component {
             this.props.graph_global.cellLabelChanged(this.props.essence_kernel, this.state.work_product_name)
             // this.state.graph.cellLabelChanged(this.state.data, "Change Test");
         }
-        let work_product_id = this.props.essence_kernel
+        let work_product_id = this.props.essence_kernel.id
 
         if (this.state.work_product_description) {
             this.props.essence_kernels.filter(function (data) {
-                return data === work_product_id
+                return data.id === work_product_id
             })[0].detail.description = this.state.work_product_description
 
         }
+
+        this.props.essence_kernels.filter(function (data) {
+            return data.id === work_product_id
+        })[0].detail.level_of_detail = this.state.level_of_detail
         // this.state.graph.cellLabelChanged(this.state.data, "Change Test");
         this.props.closeForm()
     }
@@ -239,6 +245,14 @@ class NewMethod extends Component {
                             Add State
                         </Button>
                         <br/>
+
+                        <br/>
+                        Work Product :
+                        {data.detail.workProduct.map((wp, key) =>
+                            <li>{wp.value}</li>
+                        )}
+                        <br/>
+
                         Sub Alpha :
                         {data.detail.subAlpha.map((alpha, key) =>
                             <li>{alpha.value}</li>
@@ -410,6 +424,7 @@ class NewMethod extends Component {
 
                 );
             } else if (data.style === 'WorkProduct') {
+                const level_of_detail = this.state.level_of_detail
                 return (
                     <div className={classes.paper}>Edit Work Product Detail
                         <br/><br/>
@@ -435,14 +450,27 @@ class NewMethod extends Component {
                         </TextField>
                         <br/>
                         <br/>
-                        <TextField id="work_product_level_detail"
-                                   fullWidth
-                                   onChange={this.updateState.bind(this)}
-                                   label="Work Product Level Detail"
-                                   name="work_product_level_detail"
-
-                        >
-                        </TextField>
+                        {this.state.level_of_detail.map((data, index) =>
+                            <TextField
+                                fullWidth
+                                key={index}
+                                value={data}
+                                label={"Level Detail "+ (index+1) }
+                                // onChange={event => this.state.intention[index] = event.target.value }
+                                onChange={event => this.setState({
+                                    level_of_detail: [
+                                        ...level_of_detail.slice(0, index),
+                                        event.target.value,
+                                        ...level_of_detail.slice(index + 1)
+                                    ]
+                                }) }    >
+                            </TextField>
+                        )}
+                        <br/>
+                        <br/>
+                        <Button variant="outlined" color="primary" onClick={() => this.setState({level_of_detail: [...level_of_detail, '']})}>
+                            Add level detail
+                        </Button>
                         <br/>
                         <br/>
                         <Button variant="contained" color="primary" onClick={this.saveWorkProduct.bind(this)} color="primary">

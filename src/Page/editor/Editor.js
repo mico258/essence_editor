@@ -23,6 +23,7 @@ import SideBar from './../../Component/sideBar/SideBar'
 import './Editor.css'
 import { black } from "ansi-colors";
 import Json from "../../Assets/Action/json_icon.png";
+import SaveIcon from "../../Assets/Action/save.png";
 import Alpha from "../../Assets/EssenceKernel/Alpha.png";
 import ActivityPng from "../../Assets/EssenceKernel/Activity.png";
 import ActivitySpacePng from "../../Assets/EssenceKernel/Activity_Space.png";
@@ -32,12 +33,21 @@ import KernelDetail from "../../Component/kernelDetail/KernelDetail";
 import Modal from "@material-ui/core/Modal/Modal";
 import Button from "@material-ui/core/Button/Button";
 
+import axios from 'axios';
+
+const CircularJSON = require('circular-json');
+
 
 export default class Editor extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            loading : true,
             openForm : false,
+            name: '',
+            description: '',
+            author: '',
+            intention: [],
             graph_global : null,
             detail_data : null,
             essence_kernel: [
@@ -54,6 +64,50 @@ export default class Editor extends Component {
         this.addCompetency = this.addCompetency.bind(this);
         this.addWorkProduct = this.addWorkProduct.bind(this);
         this.toJSON = this.toJSON.bind(this);
+        this.saveData = this.saveData.bind(this);
+        this.stringifyWithoutCircular = this.stringifyWithoutCircular.bind(this)
+
+        console.log(this.props.match.params.id)
+
+
+        axios.get('http://localhost:8085/method/'+this.props.match.params.id)
+            .then(result => {
+                console.log(result.data)
+                this.setState({
+                    loading : false,
+                    name : result.data.name,
+                    description : result.data.description,
+                    author : result.data.author,
+                    intention : result.data.intention,
+                    edge : CircularJSON.parse(CircularJSON.stringify(result.data.edge)),
+                    essence_kernel : CircularJSON.parse(CircularJSON.stringify(result.data.essence_kernel)),
+                })
+                this.LoadGraph();
+            }).catch(err => {
+                console.log(err)
+        })
+    }
+
+    stringifyWithoutCircular(json){
+        return JSON.stringify(
+            json,
+            ( key, value) => {
+                if((key === 'parent' || key == 'source' || key == 'target') && value !== null) {
+                    return value.id;
+                } else if(key === 'value' && value !== null && value.localName) {
+                    let results = {};
+                    Object.keys(value.attributes).forEach(
+                        (attrKey)=>{
+                            const attribute = value.attributes[attrKey];
+                            results[attribute.nodeName] = attribute.nodeValue;
+                        }
+                    )
+                    return results;
+                }
+                return value;
+            },
+            4
+        );
     }
 
     openModal() {
@@ -71,8 +125,49 @@ export default class Editor extends Component {
 
     };
 
+    saveData() {
+        var util = require('util')
+
+        var essence_kernel_data = JSON.parse(this.stringifyWithoutCircular(this.state.essence_kernel))
+
+        // for (var i = 0 ; i < this.state.essence_kernel.length ; i++) {
+        //     delete this.state.essence_kernel[i].parent
+        //     essence_kernel_data.push(JSON.parse(this.stringifyWithoutCircular(this.state.essence_kernel[i])))
+        // }
+
+        var edge_data = JSON.parse(this.stringifyWithoutCircular(this.state.edge))
+
+        // for (var i = 0 ; i < this.state.edge.length ; i++) {
+        //     delete this.state.edge[i].parent
+        //     edge_data.push(util.inspect(CircularJSON.parse(this.stringifyWithoutCircular(this.state.edge[i]))))
+        // }
+
+
+
+
+        let data = {
+            name : this.state.name,
+            description : this.state.description,
+            author : this.state.author,
+            intention : this.state.intention,
+            edge : edge_data,
+            essence_kernel : essence_kernel_data,
+
+        }
+
+        axios.put('http://localhost:8085/method/'+this.props.match.params.id,data)
+            .then(result => {
+                console.log(result)
+            }).catch(err => {
+                console.log(err)
+        })
+
+
+        console.log(this.state)
+    }
+
     componentDidMount() {
-        this.LoadGraph();
+
     }
 
     toJSON() {
@@ -424,10 +519,190 @@ export default class Editor extends Component {
 
         };
 
-        var jsonse = JSON.stringify(data_json);
+        var alpha = this.state.essence_kernel.filter(function (kernel) {
+            return kernel.style === 'Alpha'
+        })
+
+        for(var i = 0 ; i < alpha.length ; i++) {
+            let data = {
+                name_id : alpha[i].value.replace(/\s/g, ''),
+                name : alpha[i].value,
+                description : alpha[i].detail.description,
+                workProduct : [],
+                state : [],
+                subAlpha : []
+
+            }
+
+            let alpha_detail = alpha[i].detail
+
+            for (var j = 0 ; j < alpha_detail.workProduct.length ; j++) {
+                let workProductData = {
+                    name_id : alpha_detail.workProduct[j].value.replace(/\s/g, ''),
+                    name : alpha_detail.workProduct[j].value,
+                    description : alpha_detail.workProduct[j].detail.description,
+                    level_of_detail : alpha_detail.workProduct[j].detail.level_of_detail,
+                }
+
+                data.workProduct.push(workProductData)
+
+            }
+
+            for (var j = 0 ; j < alpha_detail.state.length ; j++) {
+                let state = {
+                    name_id : alpha_detail.state[j].name.replace(/\s/g, ''),
+                    name : alpha_detail.state[j].name,
+                    description : alpha_detail.state[j].description,
+                    checklist : alpha_detail.state[j].checkList,
+                }
+
+                data.state.push(state)
+
+            }
+
+
+            for (var j = 0 ; j < alpha_detail.subAlpha.length ; j++) {
+                let subAlpha = {
+                    name_id : alpha_detail.subAlpha[i].value.replace(/\s/g, ''),
+                    name : alpha_detail.subAlpha[i].value,
+                    description : alpha_detail.subAlpha[i].detail.description,
+                    workProduct : [],
+                    state : [],
+
+                }
+
+                let subAlpha_detail = alpha_detail.subAlpha[i].detail
+
+                for (var k = 0 ; k < subAlpha_detail.workProduct.length ; k++) {
+                    let workProductData = {
+                        name_id : subAlpha_detail.workProduct[k].value.replace(/\s/g, ''),
+                        name : subAlpha_detail.workProduct[k].value,
+                        description : subAlpha_detail.workProduct[k].detail.description,
+                        level_of_detail : subAlpha_detail.workProduct[k].detail.level_of_detail,
+                    }
+
+                    subAlpha.workProduct.push(workProductData)
+
+                }
+
+                for (var k = 0 ; k < subAlpha_detail.state.length ; k++) {
+                    let state = {
+                        name_id : subAlpha_detail.state[k].name.replace(/\s/g, ''),
+                        name : subAlpha_detail.state[k].name,
+                        description : subAlpha_detail.state[k].description,
+                        checklist : subAlpha_detail.state[k].checkList,
+                    }
+
+                    subAlpha.state.push(state)
+
+                }
+
+
+
+
+                data.subAlpha.push(subAlpha)
+
+            }
+
+
+            data_json_dynamic.alpha.push(data)
+        }
+
+        var activitySpace = this.state.essence_kernel.filter(function (kernel) {
+            return kernel.style === 'ActivitySpace'
+        })
+
+        for(var i = 0 ; i < activitySpace.length ; i++) {
+            let data = {
+                name_id : activitySpace[i].value.replace(/\s/g, ''),
+                name : activitySpace[i].value,
+                description : activitySpace[i].detail.description,
+                activity : [],
+
+            }
+
+            var detail = activitySpace[i].detail
+
+            for (var j = 0 ; j < detail.activity.length; j ++ ) {
+                let activity = {
+                    name_id : detail.activity[j].value.replace(/\s/g, ''),
+                    name : detail.activity[j].value,
+                    description : detail.activity[j].detail.description,
+                    completionCriterion : {
+                        alphas : [],
+                        workProduct : []
+                    },
+                    entryCriterion : {
+                        alphas : [],
+                        workProduct : []
+                    },
+                    competencies: detail.activity[j].detail.competencies
+                }
+
+                let act_detail = detail.activity[j].detail;
+
+                for (var k = 0 ; k < act_detail.entryCriterion.alphas.length; k++) {
+                    activity.entryCriterion.alphas.push(act_detail.entryCriterion.alphas[k].value)
+                }
+
+                for (var k = 0 ; k < act_detail.entryCriterion.workProduct.length; k++) {
+                    activity.entryCriterion.workProduct.push(act_detail.entryCriterion.workProduct[k].value)
+                }
+
+                for (var k = 0 ; k < act_detail.completionCriterion.alphas.length; k++) {
+                    activity.completionCriterion.alphas.push(act_detail.completionCriterion.alphas[k].value)
+                }
+
+                for (var k = 0 ; k < act_detail.completionCriterion.workProduct.length; k++) {
+                    activity.completionCriterion.workProduct.push(act_detail.completionCriterion.workProduct[k].value)
+                }
+
+
+
+                data.activity.push(activity)
+            }
+
+            data_json_dynamic.activitySpace.push(data)
+        }
+
+        var activity = this.state.essence_kernel.filter(function (kernel) {
+            return kernel.style === 'Activity'
+        })
+
+
+        var workProduct = this.state.essence_kernel.filter(function (kernel) {
+            return kernel.style === 'WorkProduct'
+        })
+
+        var competency = this.state.essence_kernel.filter(function (kernel) {
+            return kernel.style === 'Competency'
+        })
+
+        for(var i = 0 ; i < competency.length ; i++) {
+            let data = {
+                name_id : competency[i].value.replace(/\s/g, ''),
+                name : competency[i].value,
+                description : competency[i].detail.description,
+                level : [],
+
+            }
+            competency[i].detail.level.Assists ? data.level.push("Assists"):
+            competency[i].detail.level.Adapt ? data.level.push("Adapt"):
+            competency[i].detail.level.Innovates ? data.level.push("Innovates"):
+            competency[i].detail.level.Innovates ? data.level.push("Innovates"):
+            data_json_dynamic.competencies.push(data)
+        }
+
+        data_json_dynamic.name_id = this.state.name.replace(/\s/g, '');
+        data_json_dynamic.name = this.state.name;
+        data_json_dynamic.description = this.state.description;
+        data_json_dynamic.intention = this.state.intention;
+
+
+        var jsonse = JSON.stringify(data_json_dynamic);
         const file = new Blob([jsonse], {type: 'application/json'});
         element.href = URL.createObjectURL(file);
-        element.download = "MethodEssence.json";
+        element.download = data_json_dynamic.name+".json";
         document.body.appendChild(element); // Required for this to work in FireFox
         element.click();
     }
@@ -812,32 +1087,41 @@ export default class Editor extends Component {
 
                     let a = this.state.graph_global.insertVertex(
                         parent,
-                        null,
-                        component.name,
-                        component.x,
-                        component.y,
-                        component.width,
-                        component.height,
+                        component.id,
+                        component.value,
+                        component.geometry.x,
+                        component.geometry.y,
+                        component.geometry.width,
+                        component.geometry.height,
                         component.style
                         )
+
+                    a.detail = component.detail
+                    this.state.essence_kernel[key] = a
                 }
 
                 for (var key in this.state.edge) {
-                    var component = this.state.essence_kernel[key];
+                    var component = this.state.edge[key];
 
-
-
-
+                    let source_data = this.state.essence_kernel.filter(function (source) {
+                        return source.id === component.source
+                    })[0];
+                    let target_data = this.state.essence_kernel.filter(function (source) {
+                        return source.id === component.target
+                    })[0];
 
 
                     let a = this.state.graph_global.insertEdge(
                         parent,
                         component.id,
                         component.value,
-                        component.source,
-                        component.target,
+                        source_data,
+                        target_data,
                         component.style
                     )
+
+                    a.detail = component.detail
+                    this.state.edge[key] = a
                 }
 
                 // var e1 = graph.insertEdge(
@@ -924,7 +1208,7 @@ export default class Editor extends Component {
                     state.edge.push(edge);
                     state.essence_kernel.filter(function (kernel) {
                         return (kernel.id === source.id)
-                    })[0].detail.completionCriterion.alphas.push(source)
+                    })[0].detail.completionCriterion.alphas.push(target)
                 }
 
                 if( source.style === "Activity" && target.style === "WorkProduct" ) {
@@ -932,7 +1216,7 @@ export default class Editor extends Component {
                     state.edge.push(edge);
                     state.essence_kernel.filter(function (kernel) {
                         return (kernel.id === source.id)
-                    })[0].detail.completionCriterion.workProduct.push(source)
+                    })[0].detail.completionCriterion.workProduct.push(target)
                 }
 
                 if( source.style === "Alpha" && target.style === "Activity" ) {
@@ -949,6 +1233,14 @@ export default class Editor extends Component {
                     state.essence_kernel.filter(function (kernel) {
                         return (kernel.id === target.id)
                     })[0].detail.entryCriterion.workProduct.push(source)
+                }
+
+                if( source.style === "WorkProduct" && target.style === "Alpha" ) {
+
+                    state.edge.push(edge);
+                    state.essence_kernel.filter(function (kernel) {
+                        return (kernel.id === target.id)
+                    })[0].detail.workProduct.push(source)
                 }
 
 
@@ -1034,8 +1326,6 @@ export default class Editor extends Component {
                 }
 
 
-                console.log(state)
-                console.log(edge);
             });
 
 
@@ -1051,7 +1341,7 @@ export default class Editor extends Component {
 
                         let data = graph.getSelectionCell()
                         let kernel_data_detail = state.essence_kernel.filter(function (kernel) {
-                            return kernel === graph.getSelectionCell()
+                            return kernel.id === graph.getSelectionCell().id
                         })
                         console.log(data)
                         console.log(kernel_data_detail)
@@ -1079,7 +1369,7 @@ export default class Editor extends Component {
 
                     var kernel = graph.getSelectionCell()
                     state.essence_kernel  = state.essence_kernel.filter(function(ele){
-                        return ele !== kernel;
+                        return ele.id !== kernel.id;
                     });
                     graph.removeCells();
                 }
@@ -1092,7 +1382,7 @@ export default class Editor extends Component {
                 {
                     var kernel = graph.getSelectionCell()
                     state.essence_kernel  = state.essence_kernel.filter(function(ele){
-                        return ele !== kernel;
+                        return ele.id !== kernel.id;
                     });
                     graph.removeCells();
                 }
@@ -1216,24 +1506,7 @@ export default class Editor extends Component {
 
 
 
-            connectionHandler.addListener(mxEvent.CONNECT, function(sender, evt)
-            {
-                // var edge = evt.getProperty('cell');
-                // var source = graph.getModel().getTerminal(edge, true);
-                // var target = graph.getModel().getTerminal(edge, false);
-                //
-                // var style = graph.getCellStyle(vertex);
-                // var sourcePortId = style[mxConstants.STYLE_SOURCE_PORT];
-                // var targetPortId = style[mxConstants.STYLE_TARGET_PORT];
-                var edge = evt.getProperty('cell');
-                // var source = graph.getModel().getTerminal(edge, true);
-                // var target = graph.getModel().getTerminal(edge, false);
 
-                //
-
-                console.log(edge)
-
-            });
 
 
 
@@ -1248,30 +1521,38 @@ export default class Editor extends Component {
 
 
     render() {
-        return (
-            <div className="Background">
-                <div className="topnav">
-                    <button onClick={this.toJSON}><img src={Json}  /></button>
+        if (!this.state.loading) {
+            return (
+                <div className="Background">
+                    <div className="topnav">
+                        <button onClick={this.toJSON}><img src={Json}  /></button>
+                        <button onClick={this.saveData}><img src={SaveIcon}  /></button>
 
+                    </div>
+                    <div className="sidenav">
+                        <button onClick={this.addAlpha}><img src={Alpha}/></button>
+                        <button onClick={this.addActivity}><img src={ActivityPng}/></button>
+                        <button onClick={this.addActivitySpace}><img src={ActivitySpacePng}/></button>
+                        <button onClick={this.addCompetency}><img src={CompetencyPng}/></button>
+                        <button onClick={this.addWorkProduct}><img src={WorkProductPng}/></button>
+                    </div>
+                    <div className="Base" >
+
+                        <div className="graph-container" ref="divGraph" id="divGraph" />
+                    </div>
+
+                    <Modal open={this.state.openForm} onClose={this.handleClose.bind(this)} >
+                        <KernelDetail essence_kernels= {this.state.essence_kernel} essence_kernel={this.detail_data} graph_global={this.state.graph_global} closeForm={this.handleClose.bind(this)}/>
+
+                    </Modal>
                 </div>
-                <div className="sidenav">
-                    <button onClick={this.addAlpha}><img src={Alpha}/></button>
-                    <button onClick={this.addActivity}><img src={ActivityPng}/></button>
-                    <button onClick={this.addActivitySpace}><img src={ActivitySpacePng}/></button>
-                    <button onClick={this.addCompetency}><img src={CompetencyPng}/></button>
-                    <button onClick={this.addWorkProduct}><img src={WorkProductPng}/></button>
-                </div>
-                <div className="Base" >
 
-                    <div className="graph-container" ref="divGraph" id="divGraph" />
-                </div>
-
-                <Modal open={this.state.openForm} onClose={this.handleClose.bind(this)} >
-                    <KernelDetail essence_kernels= {this.state.essence_kernel} essence_kernel={this.detail_data} graph_global={this.state.graph_global} closeForm={this.handleClose.bind(this)}/>
-
-                </Modal>
-            </div>
-
+            )
+        } else {
+            return (
+                <div> Loading</div>
         )
+        }
+
     }
 }

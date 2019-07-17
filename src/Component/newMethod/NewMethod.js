@@ -5,6 +5,8 @@ import Button from "@material-ui/core/Button";
 import { Redirect } from 'react-router-dom';
 import { useAlert } from 'react-alert'
 
+import axios from 'axios';
+
 
 const styles = theme => ({
     root: {
@@ -44,7 +46,6 @@ class NewMethod extends Component {
             name: '',
             description: '',
             author: '',
-            createdMethod: false,
             intention: [],
             redirect: false
         }
@@ -60,7 +61,32 @@ class NewMethod extends Component {
         if (this.state.name === '' || this.state.intention === '' || this.state.description === '' || this.state.author === '') {
             alert('All field is required')
         } else {
-            this.props.history.push("editor/1");
+            let test = {
+                "name": "asdsad",
+                "description": "a",
+                "author": "Mico 22 uuuuu",
+                "intention" : [
+                    "intention 1",
+                    "intention 2"
+                ]
+            };
+            let data = JSON.parse(JSON.stringify(this.state))
+            data.edge = [];
+            data.essence_kernel = [];
+
+
+            console.log(data)
+
+            axios.post('http://localhost:8085/method',data)
+                .then( async result => {
+                    console.log(result)
+                    await this.props.history.push("editor/"+result.data.insertedId)
+                        ;
+
+                }).catch(err => {
+                    console.log(err)
+            })
+            // this.props.history.push("editor/1");
         }
     }
 
@@ -68,7 +94,6 @@ class NewMethod extends Component {
         let field = event.target.name;
         this.state[field] = event.target.value
 
-        console.log(this.state)
     }
 
     updateIntention (event) {

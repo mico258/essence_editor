@@ -1,12 +1,15 @@
 import _ from 'lodash'
 
-let base_url = process.env.ESSENCE_API_URL;
+let base_url = 'http://localhost:8085';
 
 const EssenceAPI = {
 	connect (method, url, data) {
 		let timeout = 60 * 60 * 1000;
 		let headers = {
-			'Content-Type': 'application/x-www-form-urlencoded'
+
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+            'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
 		};
 
 		// For future use if need authorization, etc
@@ -19,13 +22,15 @@ const EssenceAPI = {
 			headers
 		};
 
-		if(data !== null){
-			let params = new URLSearchParams();
-			_.forOwn(data, (val, key) => {
-				params.append(key, val)
-			});
-			request['body'] = params
-		};
+		// if(data !== null){
+		// 	let params = new URLSearchParams();
+		// 	_.forOwn(data, (val, key) => {
+		// 		params.append(key, val)
+		// 	});
+		// 	request['body'] = params
+		// };
+
+        request['body'] = data
 
 		return Promise.race([
 			fetch(base_url + url, request).then(async (response) => {

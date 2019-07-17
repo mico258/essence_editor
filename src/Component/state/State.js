@@ -64,9 +64,11 @@ class State extends Component {
         const checkList = this.state.checkList
         return (
             <div onChange={this.saveStateAlpha.bind(this)}>
+                <br/>
+                <br/>
                 <TextField id="name"
                            fullWidth
-                           label="State Name "
+                           label={"State "+ (this.props.index + 1)  +" Name "}
                            name="name"
                            className={classes.state}
                            onChange={this.updateState.bind(this)}
@@ -76,7 +78,7 @@ class State extends Component {
 
                 <TextField id="description"
                            fullWidth
-                           label="State Description"
+                           label={"State "+ (this.props.index + 1)  +" Description "}
                            multiline
                            name="description"
                            onChange={this.updateState.bind(this)}
