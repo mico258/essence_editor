@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5af54037-9329-454a-89e1-a5fdef6ccd9a" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/src/Component/kernelDetail/KernelDetail.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/kernelDetail/KernelDetail.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Page/editor/Editor.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Page/editor/Editor.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -40,7 +41,7 @@
           <entry key="env" value="1" />
           <entry key="html" value="1" />
           <entry key="ico" value="1" />
-          <entry key="js" value="21" />
+          <entry key="js" value="22" />
           <entry key="json" value="1" />
           <entry key="png" value="2" />
           <entry key="svg" value="1" />
@@ -53,7 +54,7 @@
           <entry key="HTML" value="1" />
           <entry key="Image" value="3" />
           <entry key="JSON" value="1" />
-          <entry key="JavaScript" value="21" />
+          <entry key="JavaScript" value="22" />
           <entry key="SVG" value="1" />
         </counts>
       </usages-collector>
@@ -67,7 +68,7 @@
           <entry key="css" value="332" />
           <entry key="env" value="7" />
           <entry key="html" value="23" />
-          <entry key="js" value="16301" />
+          <entry key="js" value="16803" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
@@ -75,7 +76,7 @@
           <entry key=".env file" value="7" />
           <entry key="CSS" value="332" />
           <entry key="HTML" value="23" />
-          <entry key="JavaScript" value="16300" />
+          <entry key="JavaScript" value="16802" />
           <entry key="RegExp" value="1" />
         </counts>
       </usages-collector>
@@ -95,14 +96,19 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Page/editor/Editor.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="328">
-              <caret line="701" column="59" lean-forward="true" selection-start-line="701" selection-start-column="59" selection-end-line="701" selection-end-column="59" />
+            <state relative-caret-position="507">
+              <caret line="411" column="22" selection-start-line="411" selection-start-column="12" selection-end-line="411" selection-end-column="22" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
-                <element signature="e#26031#27005#0" />
+                <element signature="e#1301#3052#0" />
+                <element signature="e#1346#1661#0" />
+                <element signature="e#3088#3849#0" />
+                <element signature="e#3867#3937#0" />
+                <element signature="e#4080#5356#0" />
+                <element signature="e#5405#26014#0" />
                 <element signature="e#27025#28132#0" />
                 <element signature="e#28157#28295#0" />
                 <element signature="e#28320#29259#0" />
@@ -130,10 +136,23 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Component/state/State.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="353">
+            <state relative-caret-position="335">
               <caret line="75" column="17" selection-start-line="75" selection-start-column="17" selection-end-line="75" selection-end-column="17" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Component/kernelDetail/KernelDetail.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="428">
+              <caret line="516" column="55" selection-start-line="516" selection-start-column="55" selection-end-line="516" selection-end-column="55" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+                <element signature="e#7092#9502#0" />
               </folding>
             </state>
           </provider>
@@ -235,8 +254,8 @@
         <option value="$PROJECT_DIR$/src/Page/home/Home.js" />
         <option value="$PROJECT_DIR$/src/Api/EssenceAPI.js" />
         <option value="$PROJECT_DIR$/src/Component/newMethod/NewMethod.js" />
-        <option value="$PROJECT_DIR$/src/Component/kernelDetail/KernelDetail.js" />
         <option value="$PROJECT_DIR$/src/Page/editor/Editor.js" />
+        <option value="$PROJECT_DIR$/src/Component/kernelDetail/KernelDetail.js" />
       </list>
     </option>
   </component>
@@ -257,8 +276,8 @@
     </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="14" />
-    <option name="y" value="39" />
+    <option name="x" value="109" />
+    <option name="y" value="80" />
     <option name="width" value="1440" />
     <option name="height" value="820" />
   </component>
@@ -316,6 +335,19 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Assets" type="462c0819:PsiDirectoryNode" />
               <item name="Action" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="essence_editor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="essence_editor" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Component" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="essence_editor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="essence_editor" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Component" type="462c0819:PsiDirectoryNode" />
+              <item name="kernelDetail" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="essence_editor" type="b2602c69:ProjectViewProjectNode" />
@@ -404,18 +436,18 @@
       <workItem from="1559893788067" duration="21300000" />
       <workItem from="1561845968424" duration="9224000" />
       <workItem from="1561955952839" duration="65158000" />
-      <workItem from="1563261641977" duration="19691000" />
+      <workItem from="1563261641977" duration="24698000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="192244000" />
+    <option name="totallyTimeSpent" value="197251000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="14" y="39" width="1440" height="820" extended-state="0" />
+    <frame x="109" y="80" width="1440" height="820" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17569445" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17569445" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -429,7 +461,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.16021362" />
+      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.16021362" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -559,12 +591,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Component/kernelDetail/KernelDetail.js">
+    <entry file="file://$PROJECT_DIR$/src/Api/EssenceAPI.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="406">
-          <caret line="251" column="40" selection-start-line="251" selection-start-column="40" selection-end-line="251" selection-end-column="40" />
+        <state relative-caret-position="450">
+          <caret line="30" column="13" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Page/editor/Editor.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="507">
+          <caret line="411" column="22" selection-start-line="411" selection-start-column="12" selection-end-line="411" selection-end-column="22" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
+            <element signature="e#1301#3052#0" />
+            <element signature="e#1346#1661#0" />
+            <element signature="e#3088#3849#0" />
+            <element signature="e#3867#3937#0" />
+            <element signature="e#4080#5356#0" />
+            <element signature="e#5405#26014#0" />
+            <element signature="e#27025#28132#0" />
+            <element signature="e#28157#28295#0" />
+            <element signature="e#28320#29259#0" />
+            <element signature="e#29281#30346#0" />
+            <element signature="e#30369#31294#0" />
+            <element signature="e#31315#32454#0" />
+            <element signature="e#32473#50285#0" />
           </folding>
         </state>
       </provider>
@@ -579,16 +631,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Api/EssenceAPI.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="30" column="13" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Component/state/State.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="353">
+        <state relative-caret-position="335">
           <caret line="75" column="17" selection-start-line="75" selection-start-column="17" selection-end-line="75" selection-end-column="17" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
@@ -596,20 +641,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Page/editor/Editor.js">
+    <entry file="file://$PROJECT_DIR$/src/Component/kernelDetail/KernelDetail.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="328">
-          <caret line="701" column="59" lean-forward="true" selection-start-line="701" selection-start-column="59" selection-end-line="701" selection-end-column="59" />
+        <state relative-caret-position="428">
+          <caret line="516" column="55" selection-start-line="516" selection-start-column="55" selection-end-line="516" selection-end-column="55" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
-            <element signature="e#26031#27005#0" />
-            <element signature="e#27025#28132#0" />
-            <element signature="e#28157#28295#0" />
-            <element signature="e#28320#29259#0" />
-            <element signature="e#29281#30346#0" />
-            <element signature="e#30369#31294#0" />
-            <element signature="e#31315#32454#0" />
-            <element signature="e#32473#50285#0" />
+            <element signature="e#7092#9502#0" />
           </folding>
         </state>
       </provider>

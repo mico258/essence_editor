@@ -4,6 +4,8 @@ import {Grid, Paper, TextField,} from '@material-ui/core';
 import Button from "@material-ui/core/Button/Button";
 import { Redirect } from 'react-router';
 import State from "../../Component/state/State";
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 
 
 const styles = theme => ({
@@ -201,70 +203,161 @@ class NewMethod extends Component {
 
                 var alphaState = this.state.alphaState;
 
-                return (
-                    <div className={classes.paper} >Edit Detail
 
-                        <TextField id="alpha_name"
-                                   fullWidth
-                                   label="Alpha Name"
-                                   name="alpha_name"
-                                   onChange={this.updateState.bind(this)}
-                                   defaultValue={data.value}
-                        >
-                        </TextField>
-                        <br/>
+                if (!data.detail.isSubAlpha) {
+                    return (
+                        <div className={classes.paper} >Edit Detail
 
-                        <TextField id="alpha_description"
-                                   fullWidth
-                                   multiline
-                                   rows={3}
-                                   label="Alpha Description"
-                                   onChange={this.updateState.bind(this)}
-                                   defaultValue={data.detail.description}
-                                   name="alpha_description">
-                        </TextField>
-                        <br/>
-                        State :
-                        <br/> <br/>
-                        {alphaState.map((alphaStateData, index) =>
+                            {/*<TextField id="alpha_name"*/}
+                                       {/*fullWidth*/}
+                                       {/*label="Alpha Name"*/}
+                                       {/*name="alpha_name"*/}
+                                       {/*onChange={this.updateState.bind(this)}*/}
+                                       {/*defaultValue={data.value}*/}
+                            {/*>*/}
+                            {/*</TextField>*/}
+                            <br/>
+                            <label>Alpha Name:</label>
+                            <Select
+                                value={data.value}
+                                onChange={this.updateState.bind(this)}
+                                name="alpha_name"
+                                label="Alpha Name"
+                                fullWidth
+                            >
 
-                            <State state = {alphaStateData} key = {index} index={index} saveStateAlpha={this.saveStateAlpha}>
+                                <MenuItem value="">
+                                    <em>None</em>
+                                </MenuItem>
+                                <MenuItem value={"Requirements"}>Requirements</MenuItem>
+                                <MenuItem value={"Opportunity"}>Opportunity</MenuItem>
+                                <MenuItem value={"Stakeholders"}>Stakeholders</MenuItem>
+                                <MenuItem value={"Software_System"}>Software System</MenuItem>
+                                <MenuItem value={"Work"}>Work</MenuItem>
+                                <MenuItem value={"Team"}>Team</MenuItem>
+                                <MenuItem value={"Way_of_Working"}>Way of Working</MenuItem>
 
-                            </State>
+                            </Select>
+                            <br/>
+
+                            <TextField id="alpha_description"
+                                       fullWidth
+                                       multiline
+                                       rows={3}
+                                       label="Alpha Description"
+                                       onChange={this.updateState.bind(this)}
+                                       defaultValue={data.detail.description}
+                                       name="alpha_description">
+                            </TextField>
+                            <br/>
+                            State :
+                            <br/> <br/>
+                            {alphaState.map((alphaStateData, index) =>
+
+                                <State state = {alphaStateData} key = {index} index={index} saveStateAlpha={this.saveStateAlpha}>
+
+                                </State>
 
 
 
 
-                        )}
-                        <br/>
-                        <Button variant="outlined" color="primary" onClick={() => this.setState({alphaState: [...alphaState, {
-                            name : '',
-                            description : '',
-                            checkList : []
-                            }]})}>
-                            Add State
-                        </Button>
-                        <br/>
+                            )}
+                            <br/>
+                            <Button variant="outlined" color="primary" onClick={() => this.setState({alphaState: [...alphaState, {
+                                    name : '',
+                                    description : '',
+                                    checkList : []
+                                }]})}>
+                                Add State
+                            </Button>
+                            <br/>
 
-                        <br/>
-                        Work Product :
-                        {data.detail.workProduct.map((wp, key) =>
-                            <li>{wp.value}</li>
-                        )}
-                        <br/>
+                            <br/>
+                            Work Product :
+                            {data.detail.workProduct.map((wp, key) =>
+                                <li>{wp.value}</li>
+                            )}
+                            <br/>
 
-                        Sub Alpha :
-                        {data.detail.subAlpha.map((alpha, key) =>
-                            <li>{alpha.value}</li>
-                        )}
-                        <br/>
+                            Sub Alpha :
+                            {data.detail.subAlpha.map((alpha, key) =>
+                                <li>{alpha.value}</li>
+                            )}
+                            <br/>
 
-                        <Button variant="contained" color="primary" onClick={this.saveAlpha.bind(this)}>
-                            Save
-                        </Button>
-                    </div>
+                            <Button variant="contained" color="primary" onClick={this.saveAlpha.bind(this)}>
+                                Save
+                            </Button>
+                        </div>
 
-                );
+                    );
+                } else {
+                    return (
+                        <div className={classes.paper} >Edit Detail
+
+                            <TextField id="alpha_name"
+                                       fullWidth
+                                       label="Alpha Name"
+                                       name="alpha_name"
+                                       onChange={this.updateState.bind(this)}
+                                       defaultValue={data.value}
+                            >
+                            </TextField>
+                            <br/>
+
+                            <TextField id="alpha_description"
+                                       fullWidth
+                                       multiline
+                                       rows={3}
+                                       label="Alpha Description"
+                                       onChange={this.updateState.bind(this)}
+                                       defaultValue={data.detail.description}
+                                       name="alpha_description">
+                            </TextField>
+                            <br/>
+                            State :
+                            <br/> <br/>
+                            {alphaState.map((alphaStateData, index) =>
+
+                                <State state = {alphaStateData} key = {index} index={index} saveStateAlpha={this.saveStateAlpha}>
+
+                                </State>
+
+
+
+
+                            )}
+                            <br/>
+                            <Button variant="outlined" color="primary" onClick={() => this.setState({alphaState: [...alphaState, {
+                                    name : '',
+                                    description : '',
+                                    checkList : []
+                                }]})}>
+                                Add State
+                            </Button>
+                            <br/>
+
+                            <br/>
+                            Work Product :
+                            {data.detail.workProduct.map((wp, key) =>
+                                <li>{wp.value}</li>
+                            )}
+                            <br/>
+
+                            Sub Alpha :
+                            {data.detail.subAlpha.map((alpha, key) =>
+                                <li>{alpha.value}</li>
+                            )}
+                            <br/>
+
+                            <Button variant="contained" color="primary" onClick={this.saveAlpha.bind(this)}>
+                                Save
+                            </Button>
+                        </div>
+
+                    );
+                }
+
             } else if (data.style === 'Competency') {
                 this.state.Assists = data.detail.level.Assists ;
                 this.state.Applies = data.detail.level.Applies ;
@@ -385,15 +478,45 @@ class NewMethod extends Component {
                 return (
                     <div className={classes.paper}>Edit Activity Space Detail
                         <br/><br/>
-                        <TextField id="activity_space_name"
-                                   fullWidth
+                        {/*<TextField id="activity_space_name"*/}
+                                   {/*fullWidth*/}
 
-                                   label="Activity Space Name"
-                                   name="activity_space_name"
-                                   onChange={this.updateState.bind(this)}
-                                   defaultValue={data.value}
+                                   {/*label="Activity Space Name"*/}
+                                   {/*name="activity_space_name"*/}
+                                   {/*onChange={this.updateState.bind(this)}*/}
+                                   {/*defaultValue={data.value}*/}
+                        {/*>*/}
+                        {/*</TextField>*/}
+                        <br/>
+                        <label>Activity Space Name:</label>
+                        <Select
+                            value={data.value}
+                            onChange={this.updateState.bind(this)}
+                            name="activity_space_name"
+                            label="Activity Space Name"
+                            fullWidth
                         >
-                        </TextField>
+
+                            <MenuItem value="">
+                                <em>None</em>
+                            </MenuItem>
+                            <MenuItem value={"Explore Possibillities"}>Explore Possibillities</MenuItem>
+                            <MenuItem value={"Understand Stakeholder Needs"}>Understand Stakeholder Needs</MenuItem>
+                            <MenuItem value={"Ensure Stakeholder Satisfaction"}>Ensure Stakeholder Satisfaction</MenuItem>
+                            <MenuItem value={"Use The System"}>Use The System</MenuItem>
+                            <MenuItem value={"Understand The Requirements"}>Understand The Requirements</MenuItem>
+                            <MenuItem value={"Shape The System"}>Shape The System</MenuItem>
+                            <MenuItem value={"Implement The System"}>Implement The System</MenuItem>
+                            <MenuItem value={"Test The System"}>Test The System</MenuItem>
+                            <MenuItem value={"Deploy The System"}>Deploy The System</MenuItem>
+                            <MenuItem value={"Operate The System"}>Operate The System</MenuItem>
+                            <MenuItem value={"Prepare To Do The_Work"}>Prepare To Do The Work</MenuItem>
+                            <MenuItem value={"Coordinate Activity"}>Coordinate Activity</MenuItem>
+                            <MenuItem value={"Support The Team"}>Support The Team</MenuItem>
+                            <MenuItem value={"Track Progress"}>Track Progress</MenuItem>
+                            <MenuItem value={"Stop The Work"}>Stop The Work</MenuItem>
+
+                        </Select>
                         <br/>
                         <br/>
                         <TextField id="activity_space_description"
