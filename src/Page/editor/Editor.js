@@ -187,7 +187,7 @@ export default class Editor extends Component {
         };
 
         var alpha = this.state.essence_kernel.filter(function (kernel) {
-            return kernel.style === 'Alpha'
+            return kernel.detail.type === 'Alpha'
         })
 
         for(var i = 0 ; i < alpha.length ; i++) {
@@ -276,7 +276,7 @@ export default class Editor extends Component {
         }
 
         var activitySpace = this.state.essence_kernel.filter(function (kernel) {
-            return kernel.style === 'ActivitySpace'
+            return kernel.detail.type === 'ActivitySpace'
         })
 
         for(var i = 0 ; i < activitySpace.length ; i++) {
@@ -333,16 +333,16 @@ export default class Editor extends Component {
         }
 
         var activity = this.state.essence_kernel.filter(function (kernel) {
-            return kernel.style === 'Activity'
+            return kernel.detail.type === 'Activity'
         })
 
 
         var workProduct = this.state.essence_kernel.filter(function (kernel) {
-            return kernel.style === 'WorkProduct'
+            return kernel.detail.type === 'WorkProduct'
         })
 
         var competency = this.state.essence_kernel.filter(function (kernel) {
-            return kernel.style === 'Competency'
+            return kernel.detail.type === 'Competency'
         })
 
         for(var i = 0 ; i < competency.length ; i++) {
@@ -406,8 +406,10 @@ export default class Editor extends Component {
             newAlpha.style);
         a.detail = {
             description : '',
+            type: 'Alpha',
             workProduct: [],
             state: [],
+            area : '',
             subAlpha: [],
             isSubAlpha: false,
             hasSubAlpha: false
@@ -451,10 +453,12 @@ export default class Editor extends Component {
             newActivity.style);
         a.detail = {
             description: '',
+            type: 'Activity',
             completionCriterion: {
                 alphas: [],
                 workProduct: []
             },
+            area : '',
             entryCriterion: {
                 alphas: [],
                 workProduct: []
@@ -508,6 +512,8 @@ export default class Editor extends Component {
             newActivitySpace.height,
             newActivitySpace.style);
         a.detail = {
+            type: 'ActivitySpace',
+            area : '',
             description: '',
             activity: [],
         }
@@ -552,6 +558,8 @@ export default class Editor extends Component {
 
         a.detail = {
             description : '',
+            type: 'Competency',
+            area : '',
             level: {
                 Assists : '',
                 Applies: '',
@@ -599,6 +607,8 @@ export default class Editor extends Component {
             newWorkProduct.height,
             newWorkProduct.style);
         a.detail = {
+            type: 'WorkProduct',
+            area : '',
             description: '',
             level_of_detail: []
         }
@@ -831,14 +841,14 @@ export default class Editor extends Component {
                 var target = graph.getModel().getTerminal(edge, false);
 
 
-                if( source.style === "ActivitySpace" ) {
+                if( source.detail.type === "ActivitySpace" ) {
 
                     graph.getModel().remove(edge)
 
                     alert("Activity Space tidak boleh mengarah ke essence kernel manapun")
                 }
 
-                if( target.style === "WorkProduct" && source.style!= "Activity") {
+                if( target.detail.type === "WorkProduct" && source.detail.type!= "Activity") {
 
                     graph.getModel().remove(edge)
 
@@ -846,8 +856,8 @@ export default class Editor extends Component {
                 }
                 //Constrain Untuk Competency
                 // console.log('connect '+ edge +' '+ source.id+' '+target.id+' '+sourcePortId+' '+ targetPortId);
-                if( (source.style === "Competency" && target.style === "WorkProduct" ) ||
-                    (source.style === "WorkProduct" && target.style === "Competency" )) {
+                if( (source.detail.type === "Competency" && target.detail.type === "WorkProduct" ) ||
+                    (source.detail.type === "WorkProduct" && target.detail.type === "Competency" )) {
 
                     graph.getModel().remove(edge)
 
@@ -855,22 +865,22 @@ export default class Editor extends Component {
                 }
 
                 // console.log('connect '+ edge +' '+ source.id+' '+target.id+' '+sourcePortId+' '+ targetPortId);
-                if( (source.style === "Competency" && target.style === "ActivitySpace" ) ||
-                    (source.style === "ActivitySpace" && target.style === "Competency" )) {
+                if( (source.detail.type === "Competency" && target.detail.type === "ActivitySpace" ) ||
+                    (source.detail.type === "ActivitySpace" && target.detail.type === "Competency" )) {
 
                     graph.getModel().remove(edge)
 
                     alert("Competency dan Activity Space tidak boleh saling terhubung")
                 }
 
-                if( source.style === "Activity" && target.style === "Competency" ) {
+                if( source.detail.type === "Activity" && target.detail.type === "Competency" ) {
 
                     graph.getModel().remove(edge)
 
                     alert("Activity tidak boleh mengarah ke Competency")
                 }
 
-                if( source.style === "Activity" && target.style === "Alpha" ) {
+                if( source.detail.type === "Activity" && target.detail.type === "Alpha" ) {
 
                     state.edge.push(edge);
                     state.essence_kernel.filter(function (kernel) {
@@ -878,7 +888,7 @@ export default class Editor extends Component {
                     })[0].detail.completionCriterion.alphas.push(target)
                 }
 
-                if( source.style === "Activity" && target.style === "WorkProduct" ) {
+                if( source.detail.type === "Activity" && target.detail.type === "WorkProduct" ) {
 
                     state.edge.push(edge);
                     state.essence_kernel.filter(function (kernel) {
@@ -886,7 +896,7 @@ export default class Editor extends Component {
                     })[0].detail.completionCriterion.workProduct.push(target)
                 }
 
-                if( source.style === "Alpha" && target.style === "Activity" ) {
+                if( source.detail.type === "Alpha" && target.detail.type === "Activity" ) {
 
                     state.edge.push(edge);
                     state.essence_kernel.filter(function (kernel) {
@@ -894,7 +904,7 @@ export default class Editor extends Component {
                     })[0].detail.entryCriterion.alphas.push(source)
                 }
 
-                if( source.style === "WorkProduct" && target.style === "Activity" ) {
+                if( source.detail.type === "WorkProduct" && target.detail.type === "Activity" ) {
 
                     state.edge.push(edge);
                     state.essence_kernel.filter(function (kernel) {
@@ -902,7 +912,7 @@ export default class Editor extends Component {
                     })[0].detail.entryCriterion.workProduct.push(source)
                 }
 
-                if( source.style === "WorkProduct" && target.style === "Alpha" ) {
+                if( source.detail.type === "WorkProduct" && target.detail.type === "Alpha" ) {
 
                     state.edge.push(edge);
                     state.essence_kernel.filter(function (kernel) {
@@ -912,28 +922,28 @@ export default class Editor extends Component {
 
 
 
-                if( source.style === "Competency" && target.style === "Competency" ) {
+                if( source.detail.type === "Competency" && target.detail.type === "Competency" ) {
 
                     graph.getModel().remove(edge)
 
                     alert("Competency tidak boleh saling terhubung dengan sesama Competency")
                 }
 
-                if( source.style === "Activity" && target.style === "Activity" ) {
+                if( source.detail.type === "Activity" && target.detail.type === "Activity" ) {
 
                     graph.getModel().remove(edge)
 
                     alert("Activity tidak boleh saling terhubung dengan sesama Activity")
                 }
 
-                if( source.style === "ActivitySpace" && target.style === "ActivitySpace" ) {
+                if( source.detail.type === "ActivitySpace" && target.detail.type === "ActivitySpace" ) {
 
                     graph.getModel().remove(edge)
 
                     alert("Activity Space tidak boleh saling terhubung dengan sesama Activity Space")
                 }
 
-                if( source.style === "Activity" && target.style === "ActivitySpace" ) {
+                if( source.detail.type === "Activity" && target.detail.type === "ActivitySpace" ) {
 
                     let sourceAct = state.essence_kernel.filter(function (kernel) {
                         return (kernel.id === source.id)
@@ -948,15 +958,15 @@ export default class Editor extends Component {
                     targetAct.detail.activity.push(sourceAct)
                 }
 
-                if( (source.style === "Competency" && target.style === "Alpha" ) ||
-                    (source.style === "Alpha" && target.style === "Competency" )) {
+                if( (source.detail.type === "Competency" && target.detail.type === "Alpha" ) ||
+                    (source.detail.type === "Alpha" && target.detail.type === "Competency" )) {
 
                     graph.getModel().remove(edge)
 
                     alert("Competency dan Alpha tidak boleh saling terhubung")
                 }
 
-                if( (source.style === "Competency" && target.style === "Activity" ) ) {
+                if( (source.detail.type === "Competency" && target.detail.type === "Activity" ) ) {
 
                     state.edge.push(edge);
                     state.essence_kernel.filter(function (kernel) {
@@ -964,7 +974,7 @@ export default class Editor extends Component {
                     })[0].detail.competencies.push(source.value.toString())
                 }
 
-                if( source.style === "Alpha" && target.style === "Alpha" ) {
+                if( source.detail.type === "Alpha" && target.detail.type === "Alpha" ) {
 
                     let sourceAlpha = state.essence_kernel.filter(function (kernel) {
                         return (kernel.id === source.id)
@@ -1146,6 +1156,32 @@ export default class Editor extends Component {
 
                         //let editedCell = new mxCell(null,geometry,graph.getSelectionCell().getStyle());
                         graph.translateCell(graph.getSelectionCell(),0,10)
+
+                    } catch (e) {
+
+                        console.log(e)
+
+                    } finally {
+                        // Updates the display
+                        graph.getModel().endUpdate();
+                    }
+
+                }
+            });
+
+            // keyboard c hit
+            keyHandler.bindKey(67, function(evt)
+            {
+                if (graph.isEnabled())
+                {
+
+                    graph.getModel().beginUpdate();
+
+                    try {
+
+
+                        //let editedCell = new mxCell(null,geometry,graph.getSelectionCell().getStyle());
+                        graph.setCellStyles(mxConstants.STYLE_FILLCOLOR, "green",  graph.getSelectionCell())
 
                     } catch (e) {
 

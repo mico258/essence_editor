@@ -216,7 +216,7 @@ class NewMethod extends Component {
                                        {/*defaultValue={data.value}*/}
                             {/*>*/}
                             {/*</TextField>*/}
-                            <br/>
+                            <br/><br/>
                             <label>Alpha Name:</label>
                             <Select
                                 value={data.value}
