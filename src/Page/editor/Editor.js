@@ -1032,6 +1032,25 @@ export default class Editor extends Component {
                     state.essence_kernel.filter(function (kernel) {
                         return (kernel.id === target.id)
                     })[0].detail.workProduct.push(source)
+
+                    source.detail.area = target.detail.area
+
+                    if (target.detail.area === 'Endeavor') {
+                        source.style = 'WorkProductEndeavor'
+                    } else if (target.detail.area === 'Customer') {
+                        source.style = 'WorkProductCustomer'
+                    } else if (target.detail.area === 'Solution') {
+                        source.style = 'WorkProductSolution'
+                    }
+
+                    graph.getModel().beginUpdate();
+
+                    try {
+                        graph.refresh()
+                    } finally {
+                        // Updates the display
+                        graph.getModel().endUpdate();
+                    }
                 }
 
 
@@ -1069,7 +1088,30 @@ export default class Editor extends Component {
 
                     state.edge.push(edge)
 
+                    source.detail.area = target.detail.area
+
+                    if (target.detail.area === 'Endeavor') {
+                        source.style = 'ActivityEndeavor'
+                    } else if (target.detail.area === 'Customer') {
+                        source.style = 'ActivityCustomer'
+                    } else if (target.detail.area === 'Solution') {
+                        source.style = 'ActivitySolution'
+                    }
+
                     targetAct.detail.activity.push(sourceAct)
+
+
+                    graph.getModel().beginUpdate();
+
+                    try {
+                        graph.refresh()
+                    } finally {
+                        // Updates the display
+                        graph.getModel().endUpdate();
+                    }
+
+
+
                 }
 
                 if( (source.detail.type === "Competency" && target.detail.type === "Alpha" ) ||
@@ -1086,6 +1128,27 @@ export default class Editor extends Component {
                     state.essence_kernel.filter(function (kernel) {
                         return (kernel.id === target.id)
                     })[0].detail.competencies.push(source.value.toString())
+
+                    source.detail.area = target.detail.area
+
+                    if (target.detail.area === 'Endeavor') {
+                        source.style = 'CompetencyEndeavor'
+                    } else if (target.detail.area === 'Customer') {
+                        source.style = 'CompetencyCustomer'
+                    } else if (target.detail.area === 'Solution') {
+                        source.style = 'CompetencySolution'
+                    }
+
+                    graph.getModel().beginUpdate();
+
+                    try {
+                        graph.refresh()
+                    } finally {
+                        // Updates the display
+                        graph.getModel().endUpdate();
+                    }
+
+
                 }
 
                 if( source.detail.type === "Alpha" && target.detail.type === "Alpha" ) {
@@ -1111,6 +1174,26 @@ export default class Editor extends Component {
                         targetAlpha.detail.hasSubAlpha = true
                         state.edge.push(edge)
                         targetAlpha.detail.subAlpha.push(sourceAlpha)
+
+
+                        source.detail.area = target.detail.area
+
+                        if (target.detail.area === 'Endeavor') {
+                            source.style = 'AlphaEndeavor'
+                        } else if (target.detail.area === 'Customer') {
+                            source.style = 'AlphaCustomer'
+                        } else if (target.detail.area === 'Solution') {
+                            source.style = 'AlphaSolution'
+                        }
+                    }
+
+                    graph.getModel().beginUpdate();
+
+                    try {
+                        graph.refresh()
+                    } finally {
+                        // Updates the display
+                        graph.getModel().endUpdate();
                     }
 
 

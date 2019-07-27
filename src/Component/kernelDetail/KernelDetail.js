@@ -6,6 +6,7 @@ import { Redirect } from 'react-router';
 import State from "../../Component/state/State";
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import {mxUtils} from "mxgraph-js";
 
 
 const styles = theme => ({
@@ -87,7 +88,215 @@ class NewMethod extends Component {
         let alpha_id = this.props.essence_kernel.id
         if (this.state.alpha_name) {
             this.props.graph_global.cellLabelChanged(this.props.essence_kernel, this.state.alpha_name)
-            // this.state.graph.cellLabelChanged(this.state.data, "Change Test");
+
+            if(this.state.alpha_name === 'Work'
+                || this.state.alpha_name === 'Way Of Working'
+                || this.state.alpha_name === 'Team' ) {
+
+                this.props.essence_kernels.filter(function (data) {
+                    return data.id === alpha_id
+                })[0].detail.area = 'Endeavor'
+
+                this.props.essence_kernels.filter(function (data) {
+                    return data.id === alpha_id
+                })[0].style = 'AlphaEndeavor'
+
+                this.props.essence_kernel.detail.subAlpha.map((subAlpha, key) =>
+                    this.props.essence_kernels.filter(function (data) {
+                        return data.id === subAlpha.id
+                    })[0].style = 'AlphaEndeavor'
+
+                )
+
+                this.props.essence_kernel.detail.subAlpha.map((subAlpha, key) =>
+                    this.props.essence_kernels.filter(function (data) {
+                        return data.id === subAlpha.id
+                    })[0].detail.area = 'Endeavor'
+
+                )
+
+                this.props.essence_kernel.detail.workProduct.map((workProduct, key) =>
+                    this.props.essence_kernels.filter(function (data) {
+                        return data.id === workProduct.id
+                    })[0].style = 'WorkProductEndeavor'
+
+                )
+
+                this.props.essence_kernel.detail.workProduct.map((workProduct, key) =>
+                    this.props.essence_kernels.filter(function (data) {
+                        return data.id === workProduct.id
+                    })[0].detail.area = 'Endeavor'
+
+                )
+
+                this.props.essence_kernel.detail.subAlpha.map((subAlpha, key) =>
+                    subAlpha.detail.workProduct.map((workProductSubAlpha, key) => {
+                        this.props.essence_kernels.filter(function (data) {
+                            return data.id === workProductSubAlpha.id
+                        })[0].detail.area = 'Endeavor'
+                    })
+
+                )
+
+                this.props.essence_kernel.detail.subAlpha.map((subAlpha, key) =>
+                    subAlpha.detail.workProduct.map((workProductSubAlpha, key) => {
+                        this.props.essence_kernels.filter(function (data) {
+                            return data.id === workProductSubAlpha.id
+                        })[0].style = 'WorkProductEndeavor'
+                    })
+
+                )
+
+
+
+
+
+
+            } else if (this.state.alpha_name === 'Opportunity'
+                || this.state.alpha_name === 'Stakeholders') {
+
+                this.props.essence_kernels.filter(function (data) {
+                    return data.id === alpha_id
+                })[0].detail.area = 'Customer'
+
+                this.props.essence_kernels.filter(function (data) {
+                    return data.id === alpha_id
+                })[0].style = 'AlphaCustomer'
+
+                this.props.essence_kernel.detail.subAlpha.map((subAlpha, key) =>
+                    this.props.essence_kernels.filter(function (data) {
+                        return data.id === subAlpha.id
+                    })[0].style = 'AlphaCustomer'
+
+                )
+
+                this.props.essence_kernel.detail.subAlpha.map((subAlpha, key) =>
+                    this.props.essence_kernels.filter(function (data) {
+                        return data.id === subAlpha.id
+                    })[0].detail.area = 'Customer'
+
+                )
+
+                this.props.essence_kernel.detail.workProduct.map((workProduct, key) =>
+                    this.props.essence_kernels.filter(function (data) {
+                        return data.id === workProduct.id
+                    })[0].style = 'WorkProductCustomer'
+
+                )
+
+                this.props.essence_kernel.detail.workProduct.map((workProduct, key) =>
+                    this.props.essence_kernels.filter(function (data) {
+                        return data.id === workProduct.id
+                    })[0].detail.area = 'Customer'
+
+                )
+
+                this.props.essence_kernel.detail.subAlpha.map((subAlpha, key) =>
+                    subAlpha.detail.workProduct.map((workProductSubAlpha, key) => {
+                        this.props.essence_kernels.filter(function (data) {
+                            return data.id === workProductSubAlpha.id
+                        })[0].detail.area = 'Customer'
+                    })
+
+                )
+
+                this.props.essence_kernel.detail.subAlpha.map((subAlpha, key) =>
+                    subAlpha.detail.workProduct.map((workProductSubAlpha, key) => {
+                        this.props.essence_kernels.filter(function (data) {
+                            return data.id === workProductSubAlpha.id
+                        })[0].style = 'WorkProductCustomer'
+                    })
+
+                )
+
+
+
+
+            } else if (this.state.alpha_name === 'Requirements'
+                || this.state.alpha_name === 'Software System') {
+
+                this.props.essence_kernels.filter(function (data) {
+                    return data.id === alpha_id
+                })[0].detail.area = 'Solution'
+
+                this.props.essence_kernels.filter(function (data) {
+                    return data.id === alpha_id
+                })[0].style = 'AlphaSolution'
+
+                this.props.essence_kernel.detail.subAlpha.map((subAlpha, key) =>
+                    this.props.essence_kernels.filter(function (data) {
+                        return data.id === subAlpha.id
+                    })[0].style = 'AlphaSolution'
+
+                )
+
+                this.props.essence_kernel.detail.subAlpha.map((subAlpha, key) =>
+                    this.props.essence_kernels.filter(function (data) {
+                        return data.id === subAlpha.id
+                    })[0].detail.area = 'Solution'
+
+                )
+
+                this.props.essence_kernel.detail.workProduct.map((workProduct, key) =>
+                    this.props.essence_kernels.filter(function (data) {
+                        return data.id === workProduct.id
+                    })[0].style = 'WorkProductSolution'
+
+                )
+
+                this.props.essence_kernel.detail.workProduct.map((workProduct, key) =>
+                    this.props.essence_kernels.filter(function (data) {
+                        return data.id === workProduct.id
+                    })[0].detail.area = 'Solution'
+
+                )
+
+                this.props.essence_kernel.detail.subAlpha.map((subAlpha, key) =>
+                    subAlpha.detail.workProduct.map((workProductSubAlpha, key) => {
+                        this.props.essence_kernels.filter(function (data) {
+                            return data.id === workProductSubAlpha.id
+                        })[0].detail.area = 'Solution'
+                    })
+
+                )
+
+                this.props.essence_kernel.detail.subAlpha.map((subAlpha, key) =>
+                    subAlpha.detail.workProduct.map((workProductSubAlpha, key) => {
+                        this.props.essence_kernels.filter(function (data) {
+                            return data.id === workProductSubAlpha.id
+                        })[0].style = 'WorkProductSolution'
+                    })
+
+                )
+
+
+            }
+            // else {
+            //
+            //     this.props.essence_kernels.filter(function (data) {
+            //         return data.id === alpha_id
+            //     })[0].detail.area = 'Solution'
+            //
+            //     this.props.essence_kernels.filter(function (data) {
+            //         return data.id === alpha_id
+            //     })[0].style = 'AlphaSolution'
+            //
+            //     this.props.graph_global.getModel().beginUpdate()
+            //
+            //     try {
+            //
+            //         this.props.graph_global.refresh()
+            //
+            //     } finally {
+            //         // Updates the display
+            //         this.props.graph_global.getModel().endUpdate();
+            //     }
+            //
+            // }
+
+
+
+
         }
 
 
@@ -102,6 +311,17 @@ class NewMethod extends Component {
             return data.id === alpha_id
         })[0].detail.state = this.state.alphaState
 
+        this.props.graph_global.getModel().beginUpdate()
+
+        try {
+
+            this.props.graph_global.refresh()
+
+        } finally {
+            // Updates the display
+            this.props.graph_global.getModel().endUpdate();
+        }
+
 
         // this.state.graph.cellLabelChanged(this.state.data, "Change Test");
         this.props.closeForm()
@@ -113,12 +333,122 @@ class NewMethod extends Component {
         if (this.state.activity_space_name) {
             this.props.graph_global.cellLabelChanged(this.props.essence_kernel, this.state.activity_space_name)
             // this.state.graph.cellLabelChanged(this.state.data, "Change Test");
+
+            if(this.state.activity_space_name === 'Explore Possibillities'
+                || this.state.activity_space_name === 'Understand Stakeholder Needs'
+                || this.state.activity_space_name === 'Ensure Stakeholder Satisfaction'
+                || this.state.activity_space_name === 'Use The System') {
+
+                this.props.essence_kernels.filter(function (data) {
+                    return data.id === activity_space_id
+                })[0].detail.area = 'Customer'
+
+                this.props.essence_kernels.filter(function (data) {
+                    return data.id === activity_space_id
+                })[0].style = 'ActivitySpaceCustomer'
+
+
+                this.props.essence_kernel.detail.activity.map((activity, key) =>
+                    this.props.essence_kernels.filter(function (data) {
+                        return data.id === activity.id
+                    })[0].style = 'ActivityCustomer'
+
+                )
+
+                this.props.essence_kernel.detail.activity.map((activity, key) =>
+                    this.props.essence_kernels.filter(function (data) {
+                        return data.id === activity.id
+                    })[0].detail.area = 'Customer'
+
+                )
+
+
+
+
+            } else if (this.state.activity_space_name === 'Understand The Requirements'
+                || this.state.activity_space_name === 'Shape The System'
+                || this.state.activity_space_name === 'Implement The System'
+                || this.state.activity_space_name === 'Test The System'
+                || this.state.activity_space_name === 'Deploy The System'
+                || this.state.activity_space_name === 'Operate The System') {
+
+                this.props.essence_kernels.filter(function (data) {
+                    return data.id === activity_space_id
+                })[0].detail.area = 'Solution'
+
+                this.props.essence_kernels.filter(function (data) {
+                    return data.id === activity_space_id
+                })[0].style = 'ActivitySpaceSolution'
+
+                this.props.essence_kernel.detail.activity.map((activity, key) =>
+                    this.props.essence_kernels.filter(function (data) {
+                        return data.id === activity.id
+                    })[0].style = 'ActivitySolution'
+
+                )
+
+                this.props.essence_kernel.detail.activity.map((activity, key) =>
+                    this.props.essence_kernels.filter(function (data) {
+                        return data.id === activity.id
+                    })[0].detail.area = 'Solution'
+
+                )
+
+
+
+
+
+            } else if (this.state.activity_space_name === 'Coordinate Activity'
+                || this.state.activity_space_name === 'Prepare To Do The Work'
+                || this.state.activity_space_name === 'Support The Team'
+                || this.state.activity_space_name === 'Track Progress'
+                || this.state.activity_space_name === 'Stop The Work') {
+
+                this.props.essence_kernels.filter(function (data) {
+                    return data.id === activity_space_id
+                })[0].detail.area = 'Endeavor'
+
+                this.props.essence_kernels.filter(function (data) {
+                    return data.id === activity_space_id
+                })[0].style = 'ActivitySpaceEndeavor'
+
+                this.props.essence_kernel.detail.activity.map((activity, key) =>
+                    this.props.essence_kernels.filter(function (data) {
+                        return data.id === activity.id
+                    })[0].style = 'ActivityEndeavor'
+
+                )
+
+                this.props.essence_kernel.detail.activity.map((activity, key) =>
+                    this.props.essence_kernels.filter(function (data) {
+                        return data.id === activity.id
+                    })[0].detail.area = 'Endeavor'
+
+                )
+
+
+
+            }
+
+
         }
         if (this.state.activity_space_description) {
             this.props.essence_kernels.filter(function (data) {
                 return data.id === activity_space_id
             })[0].detail.description = this.state.activity_space_description
 
+        }
+
+
+        this.props.graph_global.getModel().beginUpdate()
+
+        try {
+
+            this.props.graph_global.refresh()
+
+        } finally {
+            // Updates the display
+            this.props.graph_global.getModel().endUpdate();
         }
         // this.state.graph.cellLabelChanged(this.state.data, "Change Test");
         this.props.closeForm()
@@ -136,6 +466,18 @@ class NewMethod extends Component {
                 return data.id === activity_id
             })[0].detail.description = this.state.activity_description
 
+        }
+
+
+        this.props.graph_global.getModel().beginUpdate()
+
+        try {
+
+            this.props.graph_global.refresh()
+
+        } finally {
+            // Updates the display
+            this.props.graph_global.getModel().endUpdate();
         }
         // this.state.graph.cellLabelChanged(this.state.data, "Change Test");
         this.props.closeForm()
@@ -162,6 +504,17 @@ class NewMethod extends Component {
         // competency_detail.level.Adapt =  this.state.Adapt ? this.state.Adapt : ''
         // competency_detail.level.Innovates =  this.state.Innovates ? this.state.Innovates : ''
 
+
+        this.props.graph_global.getModel().beginUpdate()
+
+        try {
+
+            this.props.graph_global.refresh()
+
+        } finally {
+            // Updates the display
+            this.props.graph_global.getModel().endUpdate();
+        }
         this.props.closeForm()
     }
 
@@ -183,6 +536,18 @@ class NewMethod extends Component {
             return data.id === work_product_id
         })[0].detail.level_of_detail = this.state.level_of_detail
         // this.state.graph.cellLabelChanged(this.state.data, "Change Test");
+
+        this.props.graph_global.getModel().beginUpdate()
+
+        try {
+
+            this.props.graph_global.refresh()
+
+        } finally {
+            // Updates the display
+            this.props.graph_global.getModel().endUpdate();
+        }
+
         this.props.closeForm()
     }
 
@@ -232,10 +597,10 @@ class NewMethod extends Component {
                                 <MenuItem value={"Requirements"}>Requirements</MenuItem>
                                 <MenuItem value={"Opportunity"}>Opportunity</MenuItem>
                                 <MenuItem value={"Stakeholders"}>Stakeholders</MenuItem>
-                                <MenuItem value={"Software_System"}>Software System</MenuItem>
+                                <MenuItem value={"Software System"}>Software System</MenuItem>
                                 <MenuItem value={"Work"}>Work</MenuItem>
                                 <MenuItem value={"Team"}>Team</MenuItem>
-                                <MenuItem value={"Way_of_Working"}>Way of Working</MenuItem>
+                                <MenuItem value={"Way Of Working"}>Way of Working</MenuItem>
 
                             </Select>
                             <br/>
@@ -510,7 +875,7 @@ class NewMethod extends Component {
                             <MenuItem value={"Test The System"}>Test The System</MenuItem>
                             <MenuItem value={"Deploy The System"}>Deploy The System</MenuItem>
                             <MenuItem value={"Operate The System"}>Operate The System</MenuItem>
-                            <MenuItem value={"Prepare To Do The_Work"}>Prepare To Do The Work</MenuItem>
+                            <MenuItem value={"Prepare To Do The Work"}>Prepare To Do The Work</MenuItem>
                             <MenuItem value={"Coordinate Activity"}>Coordinate Activity</MenuItem>
                             <MenuItem value={"Support The Team"}>Support The Team</MenuItem>
                             <MenuItem value={"Track Progress"}>Track Progress</MenuItem>
