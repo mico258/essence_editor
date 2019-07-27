@@ -195,7 +195,7 @@ class NewMethod extends Component {
         const data = this.props.essence_kernel;
 
         if (data !=undefined) {
-            if (data.style === 'Alpha') {
+            if (data.detail.type === 'Alpha') {
                 // const alphaState = this.props.essence_kernel.detail.state;
 
                 // this.state.alphaState = this.props.essence_kernel.detail.state
@@ -358,7 +358,7 @@ class NewMethod extends Component {
                     );
                 }
 
-            } else if (data.style === 'Competency') {
+            } else if (data.detail.type === 'Competency') {
                 this.state.Assists = data.detail.level.Assists ;
                 this.state.Applies = data.detail.level.Applies ;
                 this.state.Masters = data.detail.level.Masters ;
@@ -406,7 +406,7 @@ class NewMethod extends Component {
                     </div>
 
                 );
-            } else if (data.style === 'Activity') {
+            } else if (data.detail.type === 'Activity') {
                 return (
                     <div className={classes.paper}>Edit Activity Detail
                         <br/><br/>
@@ -474,7 +474,7 @@ class NewMethod extends Component {
                     </div>
 
                 );
-            }else if (data.style === 'ActivitySpace') {
+            }else if (data.detail.type === 'ActivitySpace') {
                 return (
                     <div className={classes.paper}>Edit Activity Space Detail
                         <br/><br/>
@@ -546,7 +546,7 @@ class NewMethod extends Component {
                     </div>
 
                 );
-            } else if (data.style === 'WorkProduct') {
+            } else if (data.detail.type === 'WorkProduct') {
                 const level_of_detail = this.state.level_of_detail
                 return (
                     <div className={classes.paper}>Edit Work Product Detail

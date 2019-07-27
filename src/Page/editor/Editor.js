@@ -29,6 +29,21 @@ import ActivityPng from "../../Assets/EssenceKernel/Activity.png";
 import ActivitySpacePng from "../../Assets/EssenceKernel/Activity_Space.png";
 import CompetencyPng from "../../Assets/EssenceKernel/Competency.png";
 import WorkProductPng from "../../Assets/EssenceKernel/Work_Product.png";
+import AlphaEndeavorPng from "../../Assets/EssenceKernel/Alpha_Endeavor.png";
+import ActivityEndeavorPng from "../../Assets/EssenceKernel/Activity_Endeavor.png";
+import ActivitySpaceEndeavorPng from "../../Assets/EssenceKernel/Activity_Space_Endeavor.png";
+import CompetencyEndeavorPng from "../../Assets/EssenceKernel/Competency_Endeavor.png";
+import WorkProductEndeavorPng from "../../Assets/EssenceKernel/Work_Product_Endeavor.png";
+import AlphaCustomerPng from "../../Assets/EssenceKernel/Alpha_Customer.png";
+import ActivityCustomerPng from "../../Assets/EssenceKernel/Activity_Customer.png";
+import ActivitySpaceCustomerPng from "../../Assets/EssenceKernel/Activity_Space_Customer.png";
+import CompetencyCustomerPng from "../../Assets/EssenceKernel/Competency_Customer.png";
+import WorkProductCustomerPng from "../../Assets/EssenceKernel/Work_Product_Customer.png";
+import AlphaSolutionPng from "../../Assets/EssenceKernel/Alpha_Solution.png";
+import ActivitySolutionPng from "../../Assets/EssenceKernel/Activity_Solution.png";
+import ActivitySpaceSolutionPng from "../../Assets/EssenceKernel/Activity_Space_Solution.png";
+import CompetencySolutionPng from "../../Assets/EssenceKernel/Competency_Solution.png";
+import WorkProductSolutionPng from "../../Assets/EssenceKernel/Work_Product_Solution.png";
 import KernelDetail from "../../Component/kernelDetail/KernelDetail";
 import Modal from "@material-ui/core/Modal/Modal";
 import Button from "@material-ui/core/Button/Button";
@@ -711,12 +726,32 @@ export default class Editor extends Component {
 
 
 
-
+            //Activity Style
             var Activity = new Object();
             Activity[mxConstants.STYLE_SHAPE] = mxConstants.STYLE_IMAGE;
             Activity[mxConstants.STYLE_IMAGE] = ActivityPng;
             Activity[mxConstants.STYLE_PERIMETER] = mxPerimeter.RectanglePerimeter;
             this.state.graph_global.getStylesheet().putCellStyle('Activity', Activity)
+
+            var ActivityEndeavor = new Object();
+            ActivityEndeavor[mxConstants.STYLE_SHAPE] = mxConstants.STYLE_IMAGE;
+            ActivityEndeavor[mxConstants.STYLE_IMAGE] = ActivityEndeavorPng;
+            ActivityEndeavor[mxConstants.STYLE_PERIMETER] = mxPerimeter.RectanglePerimeter;
+            this.state.graph_global.getStylesheet().putCellStyle('ActivityEndeavor', ActivityEndeavor)
+
+            var ActivityCustomer = new Object();
+            ActivityCustomer[mxConstants.STYLE_SHAPE] = mxConstants.STYLE_IMAGE;
+            ActivityCustomer[mxConstants.STYLE_IMAGE] = ActivityCustomerPng;
+            ActivityCustomer[mxConstants.STYLE_PERIMETER] = mxPerimeter.RectanglePerimeter;
+            this.state.graph_global.getStylesheet().putCellStyle('ActivityCustomer', ActivityCustomer)
+
+            var ActivitySolution = new Object();
+            ActivitySolution[mxConstants.STYLE_SHAPE] = mxConstants.STYLE_IMAGE;
+            ActivitySolution[mxConstants.STYLE_IMAGE] = ActivitySolutionPng;
+            ActivitySolution[mxConstants.STYLE_PERIMETER] = mxPerimeter.RectanglePerimeter;
+            this.state.graph_global.getStylesheet().putCellStyle('ActivitySolution', ActivitySolution)
+
+            //Activity Space Style
 
             var ActivitySpace = new Object();
             ActivitySpace[mxConstants.STYLE_SHAPE] = mxConstants.STYLE_IMAGE;
@@ -724,11 +759,52 @@ export default class Editor extends Component {
             ActivitySpace[mxConstants.STYLE_PERIMETER] = mxPerimeter.RectanglePerimeter;
             this.state.graph_global.getStylesheet().putCellStyle('ActivitySpace', ActivitySpace)
 
+            var ActivitySpaceEndeavor = new Object();
+            ActivitySpaceEndeavor[mxConstants.STYLE_SHAPE] = mxConstants.STYLE_IMAGE;
+            ActivitySpaceEndeavor[mxConstants.STYLE_IMAGE] = ActivitySpaceEndeavorPng;
+            ActivitySpaceEndeavor[mxConstants.STYLE_PERIMETER] = mxPerimeter.RectanglePerimeter;
+            this.state.graph_global.getStylesheet().putCellStyle('ActivitySpaceEndeavor', ActivitySpaceEndeavor)
+
+            var ActivitySpaceCustomer = new Object();
+            ActivitySpaceCustomer[mxConstants.STYLE_SHAPE] = mxConstants.STYLE_IMAGE;
+            ActivitySpaceCustomer[mxConstants.STYLE_IMAGE] = ActivitySpaceCustomerPng;
+            ActivitySpaceCustomer[mxConstants.STYLE_PERIMETER] = mxPerimeter.RectanglePerimeter;
+            this.state.graph_global.getStylesheet().putCellStyle('ActivitySpaceCustomer', ActivitySpaceCustomer)
+
+            var ActivitySpaceSolution = new Object();
+            ActivitySpaceSolution[mxConstants.STYLE_SHAPE] = mxConstants.STYLE_IMAGE;
+            ActivitySpaceSolution[mxConstants.STYLE_IMAGE] = ActivitySpaceSolutionPng;
+            ActivitySpaceSolution[mxConstants.STYLE_PERIMETER] = mxPerimeter.RectanglePerimeter;
+            this.state.graph_global.getStylesheet().putCellStyle('ActivitySpaceSolution', ActivitySpaceSolution)
+
+
+            //Competency Style
+
             var Competency = new Object();
             Competency[mxConstants.STYLE_SHAPE] = mxConstants.STYLE_IMAGE;
             Competency[mxConstants.STYLE_IMAGE] = CompetencyPng;
             Competency[mxConstants.STYLE_PERIMETER] = mxPerimeter.RectanglePerimeter;
             this.state.graph_global.getStylesheet().putCellStyle('Competency', Competency)
+
+            var CompetencyEndeavor = new Object();
+            CompetencyEndeavor[mxConstants.STYLE_SHAPE] = mxConstants.STYLE_IMAGE;
+            CompetencyEndeavor[mxConstants.STYLE_IMAGE] = CompetencyEndeavorPng;
+            CompetencyEndeavor[mxConstants.STYLE_PERIMETER] = mxPerimeter.RectanglePerimeter;
+            this.state.graph_global.getStylesheet().putCellStyle('CompetencyEndeavor', CompetencyEndeavor)
+
+            var CompetencyCustomer = new Object();
+            CompetencyCustomer[mxConstants.STYLE_SHAPE] = mxConstants.STYLE_IMAGE;
+            CompetencyCustomer[mxConstants.STYLE_IMAGE] = CompetencyCustomerPng;
+            CompetencyCustomer[mxConstants.STYLE_PERIMETER] = mxPerimeter.RectanglePerimeter;
+            this.state.graph_global.getStylesheet().putCellStyle('CompetencyCustomer', CompetencyCustomer)
+
+            var CompetencySolution = new Object();
+            CompetencySolution[mxConstants.STYLE_SHAPE] = mxConstants.STYLE_IMAGE;
+            CompetencySolution[mxConstants.STYLE_IMAGE] = CompetencySolutionPng;
+            CompetencySolution[mxConstants.STYLE_PERIMETER] = mxPerimeter.RectanglePerimeter;
+            this.state.graph_global.getStylesheet().putCellStyle('CompetencySolution', CompetencySolution)
+
+            //Work Product Style
 
             var WorkProduct = new Object();
             WorkProduct[mxConstants.STYLE_SHAPE] = mxConstants.STYLE_IMAGE;
@@ -736,11 +812,49 @@ export default class Editor extends Component {
             WorkProduct[mxConstants.STYLE_PERIMETER] = mxPerimeter.RectanglePerimeter;
             this.state.graph_global.getStylesheet().putCellStyle('WorkProduct', WorkProduct)
 
+            var WorkProductEndeavor = new Object();
+            WorkProductEndeavor[mxConstants.STYLE_SHAPE] = mxConstants.STYLE_IMAGE;
+            WorkProductEndeavor[mxConstants.STYLE_IMAGE] = WorkProductEndeavorPng;
+            WorkProductEndeavor[mxConstants.STYLE_PERIMETER] = mxPerimeter.RectanglePerimeter;
+            this.state.graph_global.getStylesheet().putCellStyle('WorkProductEndeavor', WorkProductEndeavor)
+
+            var WorkProductCustomer = new Object();
+            WorkProductCustomer[mxConstants.STYLE_SHAPE] = mxConstants.STYLE_IMAGE;
+            WorkProductCustomer[mxConstants.STYLE_IMAGE] = WorkProductCustomerPng;
+            WorkProductCustomer[mxConstants.STYLE_PERIMETER] = mxPerimeter.RectanglePerimeter;
+            this.state.graph_global.getStylesheet().putCellStyle('WorkProductCustomer', WorkProductCustomer)
+
+            var WorkProductSolution = new Object();
+            WorkProductSolution[mxConstants.STYLE_SHAPE] = mxConstants.STYLE_IMAGE;
+            WorkProductSolution[mxConstants.STYLE_IMAGE] = WorkProductSolutionPng;
+            WorkProductSolution[mxConstants.STYLE_PERIMETER] = mxPerimeter.RectanglePerimeter;
+            this.state.graph_global.getStylesheet().putCellStyle('WorkProductSolution', WorkProductSolution)
+
+            //Alpha style
+
             var Alphastyle = new Object();
             Alphastyle[mxConstants.STYLE_SHAPE] = mxConstants.STYLE_IMAGE;
             Alphastyle[mxConstants.STYLE_IMAGE] = Alpha;
             Alphastyle[mxConstants.STYLE_PERIMETER] = mxPerimeter.RectanglePerimeter;
             this.state.graph_global.getStylesheet().putCellStyle('Alpha', Alphastyle)
+
+            var AlphaEndeavor = new Object();
+            AlphaEndeavor[mxConstants.STYLE_SHAPE] = mxConstants.STYLE_IMAGE;
+            AlphaEndeavor[mxConstants.STYLE_IMAGE] = AlphaEndeavorPng;
+            AlphaEndeavor[mxConstants.STYLE_PERIMETER] = mxPerimeter.RectanglePerimeter;
+            this.state.graph_global.getStylesheet().putCellStyle('AlphaEndeavor', AlphaEndeavor)
+
+            var AlphaCustomer = new Object();
+            AlphaCustomer[mxConstants.STYLE_SHAPE] = mxConstants.STYLE_IMAGE;
+            AlphaCustomer[mxConstants.STYLE_IMAGE] = AlphaCustomerPng;
+            AlphaCustomer[mxConstants.STYLE_PERIMETER] = mxPerimeter.RectanglePerimeter;
+            this.state.graph_global.getStylesheet().putCellStyle('AlphaCustomer', AlphaCustomer)
+
+            var AlphaSolution = new Object();
+            AlphaSolution[mxConstants.STYLE_SHAPE] = mxConstants.STYLE_IMAGE;
+            AlphaSolution[mxConstants.STYLE_IMAGE] = AlphaSolutionPng;
+            AlphaSolution[mxConstants.STYLE_PERIMETER] = mxPerimeter.RectanglePerimeter;
+            this.state.graph_global.getStylesheet().putCellStyle('AlphaSolution', AlphaSolution)
 
 
             // console.log(this.state.graph_global.getStylesheet())
