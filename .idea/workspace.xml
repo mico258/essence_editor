@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5af54037-9329-454a-89e1-a5fdef6ccd9a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Page/editor/Editor.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Page/editor/Editor.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -66,18 +66,18 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="css" value="337" />
+          <entry key="css" value="349" />
           <entry key="env" value="7" />
           <entry key="html" value="23" />
-          <entry key="js" value="18203" />
+          <entry key="js" value="18668" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key=".env file" value="7" />
-          <entry key="CSS" value="337" />
+          <entry key="CSS" value="349" />
           <entry key="HTML" value="23" />
-          <entry key="JavaScript" value="18202" />
+          <entry key="JavaScript" value="18667" />
           <entry key="RegExp" value="1" />
         </counts>
       </usages-collector>
@@ -97,11 +97,14 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Page/editor/Editor.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="15" column="17" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
+            <state relative-caret-position="298">
+              <caret line="1263" column="49" selection-start-line="1263" selection-start-column="49" selection-end-line="1263" selection-end-column="49" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -109,8 +112,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Component/newMethod/NewMethod.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="10" column="11" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="11" />
+            <state relative-caret-position="409">
+              <caret line="144" column="22" selection-start-line="144" selection-start-column="22" selection-end-line="144" selection-end-column="22" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -146,11 +149,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/App.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="13" column="31" selection-start-line="13" selection-start-column="31" selection-end-line="13" selection-end-column="31" />
+            <state relative-caret-position="193">
+              <caret line="24" column="14" lean-forward="true" selection-start-line="24" selection-start-column="14" selection-end-line="24" selection-end-column="14" />
             </state>
           </provider>
         </entry>
@@ -184,8 +187,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>mxVertexHandler</find>
-      <find>work_product</find>
       <find>mxEve</find>
       <find>rubbe</find>
       <find>mxRubberband</find>
@@ -193,7 +194,6 @@
       <find>console</find>
       <find>work</find>
       <find>checkedState</find>
-      <find>WorkProduct</find>
       <find>alpha</find>
       <find>activi</find>
       <find>ActivitySpace</find>
@@ -214,6 +214,9 @@
       <find>filter</find>
       <find>style</find>
       <find>essence_kernel</find>
+      <find>work pro</find>
+      <find>WorkProduct</find>
+      <find>map</find>
     </findStrings>
     <replaceStrings>
       <replace>Essence</replace>
@@ -242,9 +245,9 @@
         <option value="$PROJECT_DIR$/src/Page/home/Home.js" />
         <option value="$PROJECT_DIR$/src/Api/EssenceAPI.js" />
         <option value="$PROJECT_DIR$/src/Component/newMethod/NewMethod.js" />
-        <option value="$PROJECT_DIR$/src/Page/editor/Editor.js" />
         <option value="$PROJECT_DIR$/src/Component/kernelDetail/KernelDetail.js" />
         <option value="$PROJECT_DIR$/src/App.css" />
+        <option value="$PROJECT_DIR$/src/Page/editor/Editor.js" />
       </list>
     </option>
   </component>
@@ -264,7 +267,7 @@
       <path value="$PROJECT_DIR$/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
+  <component name="ProjectFrameBounds">
     <option name="y" value="23" />
     <option name="width" value="1440" />
     <option name="height" value="820" />
@@ -342,6 +345,27 @@
               <item name="essence_editor" type="b2602c69:ProjectViewProjectNode" />
               <item name="essence_editor" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Component" type="462c0819:PsiDirectoryNode" />
+              <item name="newMethod" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="essence_editor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="essence_editor" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Component" type="462c0819:PsiDirectoryNode" />
+              <item name="sideBar" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="essence_editor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="essence_editor" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Component" type="462c0819:PsiDirectoryNode" />
+              <item name="state" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="essence_editor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="essence_editor" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Page" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -350,6 +374,20 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Page" type="462c0819:PsiDirectoryNode" />
               <item name="editor" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="essence_editor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="essence_editor" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Page" type="462c0819:PsiDirectoryNode" />
+              <item name="home" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="essence_editor" type="b2602c69:ProjectViewProjectNode" />
+              <item name="essence_editor" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Page" type="462c0819:PsiDirectoryNode" />
+              <item name="notFound" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -425,15 +463,16 @@
       <workItem from="1561845968424" duration="9224000" />
       <workItem from="1561955952839" duration="65158000" />
       <workItem from="1563261641977" duration="40420000" />
-      <workItem from="1564409950695" duration="560000" />
+      <workItem from="1564409950695" duration="4773000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="213533000" />
+    <option name="totallyTimeSpent" value="217746000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="820" extended-state="1" />
+    <frame x="0" y="23" width="1440" height="820" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17569445" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -460,6 +499,18 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/Page/editor/Editor.js</url>
+          <line>1245</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/serviceWorker.js">
@@ -512,6 +563,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
           <caret line="36" column="87" selection-start-line="36" selection-start-column="87" selection-end-line="36" selection-end-column="87" />
+          <folding>
+            <element signature="e#0#86#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -533,6 +587,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
           <caret line="19" column="16" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -556,16 +613,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="13" column="11" selection-start-line="13" selection-start-column="6" selection-end-line="13" selection-end-column="11" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Component/newMethod/NewMethod.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="10" column="11" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="11" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
@@ -610,17 +657,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Page/editor/Editor.js">
+    <entry file="file://$PROJECT_DIR$/src/App.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="15" column="17" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
+        <state relative-caret-position="193">
+          <caret line="24" column="14" lean-forward="true" selection-start-line="24" selection-start-column="14" selection-end-line="24" selection-end-column="14" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/App.css">
+    <entry file="file://$PROJECT_DIR$/src/Component/newMethod/NewMethod.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="31" selection-start-line="13" selection-start-column="31" selection-end-line="13" selection-end-column="31" />
+        <state relative-caret-position="409">
+          <caret line="144" column="22" selection-start-line="144" selection-start-column="22" selection-end-line="144" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Page/editor/Editor.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="298">
+          <caret line="1263" column="49" selection-start-line="1263" selection-start-column="49" selection-end-line="1263" selection-end-column="49" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

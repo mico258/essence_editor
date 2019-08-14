@@ -987,6 +987,14 @@ export default class Editor extends Component {
                     alert("Competency dan Activity Space tidak boleh saling terhubung")
                 }
 
+                if( (source.detail.type === "WorkProduct" && target.detail.type === "ActivitySpace" ) ||
+                    (source.detail.type === "ActivitySpace" && target.detail.type === "WorkProduct" )) {
+
+                    graph.getModel().remove(edge)
+
+                    alert("WorkProduct dan Activity Space tidak boleh saling terhubung")
+                }
+
                 if( source.detail.type === "Activity" && target.detail.type === "Competency" ) {
 
                     graph.getModel().remove(edge)
@@ -1245,6 +1253,32 @@ export default class Editor extends Component {
                     state.essence_kernel  = state.essence_kernel.filter(function(ele){
                         return ele.id !== kernel.id;
                     });
+                    if (kernel.detail.type == 'Competency') {
+                        let as = state.essence_kernel.filter(function(ele){
+                            return ele.detail.type === "Activity";
+                        });
+
+                        for (var i = 0 ; i < as.length ; i++) {
+
+                            as[i].detail.competencies = as[i].detail.competencies.filter(function (competency) {
+                                return competency !== kernel.value
+                            })
+
+                        }
+                    }
+                    if (kernel.detail.type == 'Activity') {
+                        let as = state.essence_kernel.filter(function(ele){
+                            return ele.detail.type === "ActivitySpace";
+                        });
+
+                        for (var i = 0 ; i < as.length ; i++) {
+
+                            as[i].detail.activity = as[i].detail.activity.filter(function (activity) {
+                                return activity.id !== kernel.id
+                            })
+
+                        }
+                    }
                     graph.removeCells();
                 }
             });
@@ -1366,31 +1400,7 @@ export default class Editor extends Component {
                 }
             });
 
-            // keyboard c hit
-            keyHandler.bindKey(67, function(evt)
-            {
-                if (graph.isEnabled())
-                {
 
-                    graph.getModel().beginUpdate();
-
-                    try {
-
-
-                        //let editedCell = new mxCell(null,geometry,graph.getSelectionCell().getStyle());
-                        graph.setCellStyles(mxConstants.STYLE_FILLCOLOR, "green",  graph.getSelectionCell())
-
-                    } catch (e) {
-
-                        console.log(e)
-
-                    } finally {
-                        // Updates the display
-                        graph.getModel().endUpdate();
-                    }
-
-                }
-            });
 
             var undoManager = new mxUndoManager();
             console.log(undoManager)
