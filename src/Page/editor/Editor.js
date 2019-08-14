@@ -1266,6 +1266,49 @@ export default class Editor extends Component {
 
                         }
                     }
+
+                    if (kernel.detail.type == 'Alpha') {
+                        let as = state.essence_kernel.filter(function(ele){
+                            return ele.detail.type === "Activity";
+                        });
+
+                        if (kernel.detail.isSubAlpha) {
+                            let alphas = state.essence_kernel.filter(function(ele){
+                                return (ele.detail.type === "Alpha" && !ele.detail.isSubAlpha);
+                            });
+                            for (var i = 0 ; i < alphas.length ; i++) {
+
+                                alphas[i].detail.subAlpha = alphas[i].detail.subAlpha.filter(function (alpha) {
+                                    return alpha.id !== kernel.id
+                                })
+
+
+
+                            }
+
+                        }
+
+                        for (var i = 0 ; i < as.length ; i++) {
+
+                            as[i].detail.completionCriterion.alphas = as[i].detail.completionCriterion.alphas.filter(function (alpha) {
+                                return alpha.id !== kernel.id
+                            })
+
+
+
+                        }
+
+                        for (var i = 0 ; i < as.length ; i++) {
+
+                            as[i].detail.entryCriterion.alphas = as[i].detail.entryCriterion.alphas.filter(function (alpha) {
+                                return alpha.id !== kernel.id
+                            })
+
+
+
+                        }
+                    }
+
                     if (kernel.detail.type == 'Activity') {
                         let as = state.essence_kernel.filter(function(ele){
                             return ele.detail.type === "ActivitySpace";
